@@ -1,0 +1,3204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculus Hub - Your Gateway to Mathematical Understanding</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* Light gray background */
+            color: #334155; /* Dark slate gray text */
+        }
+        .header-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Gradient purple */
+        }
+        .btn-primary {
+            background-color: #4f46e5; /* Indigo 600 */
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            transition: background-color 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #4338ca; /* Indigo 700 */
+        }
+        .card {
+            background-color: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            transition: transform 0.2s ease-in-out;
+            display: flex; /* Added for layout */
+            flex-direction: column; /* Added for layout */
+            justify-content: space-between; /* Added for layout */
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .section-title {
+            color: #1e293b; /* Darker slate gray */
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+        .nav-link {
+            transition: color 0.3s ease;
+        }
+        .nav-link:hover {
+            color: #a78bfa; /* Violet 400 */
+        }
+        .footer-bg {
+            background-color: #1e293b; /* Dark slate gray */
+            color: #cbd5e1; /* Light gray for footer text */
+        }
+        /* Custom scrollbar for better aesthetics */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .modal-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            max-width: 800px;
+            width: 90%;
+            max-height: 90vh; /* Limit height for scrollability */
+            overflow-y: auto; /* Enable scrolling for long content */
+            position: relative;
+            transform: translateY(-20px);
+            opacity: 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+        .modal-overlay.open .modal-content {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        .modal-close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #64748b; /* Slate 500 */
+            transition: color 0.2s ease;
+        }
+        .modal-close-btn:hover {
+            color: #1e293b; /* Darker slate gray */
+        }
+
+        /* Solution styles (kept for reference, but not used now) */
+        .solution-step {
+            display: none; /* Hidden by default */
+            margin-left: 1.5rem;
+            padding: 0.5rem 0;
+            border-bottom: 1px dashed #e2e8f0;
+        }
+        .solution-step:last-child {
+            border-bottom: none;
+        }
+        .solution-step.visible {
+            display: block;
+        }
+        .solution-controls button {
+            margin-right: 0.5rem;
+            padding: 0.3rem 0.8rem;
+            border-radius: 0.3rem;
+            background-color: #e0e7ff; /* Indigo 100 */
+            color: #4f46e5; /* Indigo 600 */
+            border: 1px solid #c7d2fe; /* Indigo 200 */
+            transition: background-color 0.2s ease;
+        }
+        .solution-controls button:hover {
+            background-color: #c7d2fe; /* Indigo 200 */
+        }
+    </style>
+</head>
+<body class="leading-normal tracking-normal">
+
+    <header class="header-bg py-6 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center px-4">
+            <a href="#" class="text-white text-3xl font-bold rounded-lg p-2 hover:bg-white hover:text-purple-700 transition duration-300">Calculus Hub</a>
+            <nav>
+                <ul class="flex space-x-6">
+                    <li><a href="#about" class="nav-link text-white text-lg font-medium">About</a></li>
+                    <li><a href="#concepts" class="nav-link text-white text-lg font-medium">Concepts</a></li>
+                    <li><a href="#formulas" class="nav-link text-white text-lg font-medium">Formulas</a></li>
+                    <li><a href="#applications" class="nav-link text-white text-lg font-medium">Applications</a></li>
+                    <li><a href="#practice" class="nav-link text-white text-lg font-medium">Practice</a></li>
+                    <li><a href="#contact" class="nav-link text-white text-lg font-medium">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="py-20 text-center bg-white">
+        <div class="container mx-auto px-4">
+            <h1 class="text-5xl font-extrabold text-gray-900 mb-6">Unlock the Power of Calculus</h1>
+            <p class="text-xl text-gray-700 mb-8 max-w-3xl mx-auto">
+                Dive deep into the fascinating world of calculus with clear explanations, essential formulas, and real-world applications.
+                Whether you're a student, educator, or just curious, this is your ultimate resource.
+            </p>
+            <a href="#concepts" class="btn-primary inline-block text-lg font-semibold shadow-lg hover:shadow-xl">Start Learning Now</a>
+        </div>
+    </section>
+
+    <section id="about" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="section-title text-4xl text-center">About This Website</h2>
+            <div class="max-w-4xl mx-auto text-lg leading-relaxed text-gray-700">
+                <p class="mb-4">
+                    This website is dedicated to making calculus accessible and engaging for everyone.
+                    Inspired by "Calculus, 11th Edition, by Ron Larson & Bruce H. Edwards," we aim to provide
+                    a comprehensive and user-friendly platform for learning and reviewing fundamental calculus concepts.
+                </p>
+                <p class="mb-4">
+                    Our goal is to demystify calculus, offering clear explanations, practical examples, and
+                    a visually appealing interface to enhance your learning journey. We believe that
+                    understanding calculus is key to unlocking many scientific and engineering principles,
+                    and we are here to support your educational pursuits.
+                </p>
+                <p>
+                    We hope you find this resource invaluable and return frequently to deepen your mathematical understanding.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="concepts" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="section-title text-4xl text-center">Comprehensive Calculus Concepts</h2>
+            <p class="text-lg text-gray-700 mb-8 text-center max-w-3xl mx-auto">
+                Explore the fundamental and advanced topics of calculus,
+                structured to align with the curriculum of "Calculus, 11th Edition, by Ron Larson & Bruce H. Edwards."
+                Each section provides a summary of the key ideas.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="card">
+                    <div>
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-3">Chapter P: Preparation for Calculus</h3>
+                        <p class="text-gray-600">
+                            This introductory chapter reviews essential pre-calculus concepts necessary for success in calculus.
+                            Topics typically include functions and their graphs, lines in the plane, solving equations and inequalities,
+                            and an introduction to trigonometric functions and their properties. It serves as a crucial foundation.
+                            (For detailed lessons, examples, and exercises, refer to Chapter P of the textbook).
+                        </p>
+                    </div>
+                    <button class="btn-primary mt-6 view-problems-btn" data-chapter="P">View Practice Problems</button>
+                </div>
+                <div class="card">
+                    <div>
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-3">Chapter 1: Limits and Their Properties</h3>
+                        <p class="text-gray-600">
+                            The foundational concept of calculus, limits delve into the behavior of a function as its input
+                            approaches a specific value. This section covers various techniques for evaluating limits,
+                            including direct substitution, factoring, and rationalizing, as well as understanding
+                            one-sided limits, infinite limits, and limits at infinity. A crucial aspect explored is
+                            the concept of continuity, examining functions that can be drawn without lifting the pen.
+                            (For detailed lessons, examples, and exercises, refer to Chapter 1, pages 45-98 of the textbook).
+                        </p>
+                    </div>
+                    <button class="btn-primary mt-6 view-problems-btn" data-chapter="1">View Practice Problems</button>
+                </div>
+                <div class="card">
+                    <div>
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-3">Chapter 2: Differentiation</h3>
+                        <p class="text-gray-600">
+                            This section introduces the derivative, a powerful tool for analyzing rates of change and slopes of tangent lines.
+                            You'll learn the definition of the derivative, fundamental differentiation rules (power, constant multiple, sum/difference),
+                            and more advanced techniques like the product rule, quotient rule, and the Chain Rule.
+                            Implicit differentiation for equations not explicitly solved for y, and higher-order derivatives
+                            (second derivative, third derivative, etc.) are also covered, providing insights into concavity and acceleration.
+                            (For detailed lessons, examples, and exercises, refer to Chapter 2, pages 99-164 of the textbook).
+                        </p>
+                    </div>
+                    <button class="btn-primary mt-6 view-problems-btn" data-chapter="2">View Practice Problems</button>
+                </div>
+                <div class="card">
+                    <div>
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-3">Chapter 3: Applications of Differentiation</h3>
+                        <p class="text-gray-600">
+                            Discover how derivatives are applied to solve real-world problems. This includes finding absolute and relative extrema
+                            of functions, understanding Rolle's Theorem and the Mean Value Theorem, and determining where a function is
+                            increasing or decreasing. Topics like concavity, points of inflection, and limits at infinity are used for
+                            comprehensive curve sketching. Optimization problems, which involve finding maximum or minimum values in various scenarios,
+                            and Newton's Method for approximating roots of equations are also explored. Related rates problems, where you find
+                            the rate of change of one quantity in terms of the rate of change of another, are a key focus.
+                            (For detailed lessons, examples, and exercises, refer to Chapter 3, pages 165-246 of the textbook).
+                        </p>
+                    </div>
+                    <button class="btn-primary mt-6 view-problems-btn" data-chapter="3">View Practice Problems</button>
+                </div>
+                <div class="card">
+                    <div>
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-3">Chapter 4: Integration</h3>
+                        <p class="text-gray-600">
+                            Integration, the inverse process of differentiation, is introduced through antiderivatives and the concept of indefinite integrals.
+                            You'll learn about Riemann sums as a way to approximate the area under a curve, leading to the definition of the definite integral.
+                            The Fundamental Theorem of Calculus connects differentiation and integration, providing a powerful method for evaluating definite integrals.
+                            Various integration techniques, such as the power rule for integration, trigonometric integrals, and the crucial method of substitution (change of variables),
+                            are thoroughly explained. This section also covers finding the average value of a function over an interval.
+                            (For detailed lessons, examples, and exercises, refer to Chapter 4, pages 247-312 of the textbook).
+                        </p>
+                    </div>
+                    <button class="btn-primary mt-6 view-problems-btn" data-chapter="4">View Practice Problems</button>
+                </div>
+                <div class="card">
+                    <div>
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-3">Chapter 5: Logarithmic, Exponential, and Other Transcendental Functions</h3>
+                        <p class="text-gray-600">
+                            This section expands calculus to include logarithmic, exponential, and inverse trigonometric functions, which are known as transcendental functions.
+                            You will learn their unique differentiation and integration rules, including the natural logarithmic function and the natural exponential function.
+                            The concept of inverse functions is revisited, and L'Hôpital's Rule is introduced as a powerful tool for evaluating indeterminate forms of limits.
+                            Additionally, hyperbolic functions and their properties are explored, further broadening the scope of functions you can analyze with calculus.
+                            (For detailed lessons, examples, and exercises, refer to Chapter 5, pages 313-404 of the textbook).
+                        </p>
+                    </div>
+                    <button class="btn-primary mt-6 view-problems-btn" data-chapter="5">View Practice Problems</button>
+                </div>
+                <div class="card">
+                    <div>
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-3">Chapter 6: Differential Equations</h3>
+                        <p class="text-gray-600">
+                            An introduction to differential equations, which are equations involving derivatives of an unknown function.
+                            This section covers methods for solving various types of first-order differential equations, including
+                            slope fields for visualizing solutions, Euler's Method for numerical approximations, and techniques like
+                            separation of variables. Real-world applications such as growth and decay models (e.g., population growth, radioactive decay)
+                            and first-order linear differential equations are explored, demonstrating how calculus can describe dynamic systems.
+                            Initial value problems, where a specific solution is found based on an initial condition, are also a key topic.
+                            (For detailed lessons, examples, and exercises, refer to Chapter 6, pages 405-442 of the textbook).
+                        </p>
+                    </div>
+                    <button class="btn-primary mt-6 view-problems-btn" data-chapter="6">View Practice Problems</button>
+                </div>
+                <div class="card">
+                    <div>
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-3">Chapter 7: Applications of Integration</h3>
+                        <p class="text-gray-600">
+                            Building on integration fundamentals, this chapter explores various applications of definite integrals.
+                            Topics include calculating the area of a region between two curves, finding the volume of solids of revolution using
+                            the disk, washer, and shell methods, determining arc length, and computing the surface area of a solid of revolution.
+                            Further applications involve work done by a variable force, fluid pressure and force, and moments and centers of mass.
+                            (For detailed lessons, examples, and exercises, refer to Chapter 7 of the textbook).
+                        </p>
+                    </div>
+                    <button class="btn-primary mt-6 view-problems-btn" data-chapter="7">View Practice Problems</button>
+                </div>
+                <div class="card">
+                    <div>
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-3">Chapter 8: Integration Techniques, L'Hôpital's Rule, and Improper Integrals</h3>
+                        <p class="text-gray-600">
+                            This chapter expands on integration techniques, introducing methods beyond basic substitution.
+                            Key topics include integration by parts, trigonometric integrals, trigonometric substitution,
+                            and integration of rational functions by partial fractions. Additionally, it covers indeterminate forms and
+                            L'Hôpital's Rule for evaluating limits, and the evaluation of improper integrals, which involve infinite limits of integration
+                            or infinite discontinuities within the interval of integration.
+                            (For detailed lessons, examples, and exercises, refer to Chapter 8 of the textbook).
+                        </p>
+                    </div>
+                    <button class="btn-primary mt-6 view-problems-btn" data-chapter="8">View Practice Problems</button>
+                </div>
+                <div class="card">
+                    <div>
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-3">Chapter 9: Infinite Series</h3>
+                        <p class="text-gray-600">
+                            Dive into the fascinating world of infinite sequences and series. This chapter covers definitions of sequences and their convergence,
+                            various tests for convergence and divergence of series (e.g., Integral Test, Comparison Tests, Alternating Series Test, Ratio Test, Root Test).
+                            Power series, including their radius and interval of convergence, are explored, leading to Taylor and Maclaurin series,
+                            which allow functions to be represented as infinite polynomials.
+                            (For detailed lessons, examples, and exercises, refer to Chapter 9 of the textbook).
+                        </p>
+                    </div>
+                    <button class="btn-primary mt-6 view-problems-btn" data-chapter="9">View Practice Problems</button>
+                </div>
+                <div class="card">
+                    <div>
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-3">Chapter 10: Conics, Parametric Equations, and Polar Coordinates</h3>
+                        <p class="text-gray-600">
+                            This chapter expands beyond rectangular coordinates to explore alternative ways of describing curves and motion.
+                            Topics include conic sections (parabolas, ellipses, hyperbolas) in their standard and rotated forms,
+                            parametric equations for describing motion over time, and calculus in parametric form (derivatives, arc length).
+                            Polar coordinates offer a different perspective for graphing and analyzing curves, with corresponding calculus operations.
+                            (For detailed lessons, examples, and exercises, refer to Chapter 10 of the textbook).
+                        </p>
+                    </div>
+                    <button class="btn-primary mt-6 view-problems-btn" data-chapter="10">View Practice Problems</button>
+                </div>
+                <div class="card">
+                    <div>
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-3">Chapter 11: Vectors and the Geometry of Space</h3>
+                        <p class="text-gray-600">
+                            An introduction to three-dimensional analytical geometry. This chapter covers vectors in two and three dimensions,
+                            including vector operations (addition, subtraction, scalar multiplication), dot products and cross products,
+                            and their geometric interpretations. It also delves into lines and planes in space, cylindrical and spherical coordinates,
+                            and introduces vector-valued functions and their derivatives and integrals, laying the groundwork for multivariable calculus.
+                            (For detailed lessons, examples, and exercises, refer to Chapter 11 of the textbook).
+                        </p>
+                    </div>
+                    <button class="btn-primary mt-6 view-problems-btn" data-chapter="11">View Practice Problems</button>
+                </div>
+                <div class="card">
+                    <div>
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-3">Chapter 12: Functions of Several Variables and Partial Differentiation</h3>
+                        <p class="text-gray-600">
+                            This chapter extends calculus to functions of two or more independent variables.
+                            Key topics include limits and continuity for multivariable functions, partial derivatives,
+                            the Chain Rule for functions of several variables, directional derivatives, and gradients.
+                            Applications include finding extrema of functions of several variables and solving optimization problems
+                            using Lagrange multipliers.
+                            (For detailed lessons, examples, and exercises, refer to Chapter 12 of the textbook).
+                        </p>
+                    </div>
+                    <button class="btn-primary mt-6 view-problems-btn" data-chapter="12">View Practice Problems</button>
+                </div>
+                <div class="card">
+                    <div>
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-3">Chapter 13: Multiple Integrals</h3>
+                        <p class="text-gray-600">
+                            Building on single integrals, this chapter introduces double and triple integrals for calculating volumes,
+                            areas, and other quantities in higher dimensions. Topics include iterated integrals, double integrals over general regions,
+                            area by double integration, and applications such as center of mass and moments of inertia.
+                            Change of variables using polar, cylindrical, and spherical coordinates for integration is also covered.
+                            (For detailed lessons, examples, and exercises, refer to Chapter 13 of the textbook).
+                        </p>
+                    </div>
+                    <button class="btn-primary mt-6 view-problems-btn" data-chapter="13">View Practice Problems</button>
+                </div>
+                <div class="card">
+                    <div>
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-3">Chapter 14: Vector Calculus</h3>
+                        <p class="text-gray-600">
+                            This advanced chapter explores the calculus of vector fields. Topics include vector fields,
+                            line integrals (integrating along a curve), independence of path, Green's Theorem (relating line integrals to double integrals),
+                            surface integrals (integrating over a surface), and fundamental theorems like the Divergence Theorem and Stokes' Theorem,
+                            which are crucial in physics and engineering.
+                            (For detailed lessons, examples, and exercises, refer to Chapter 14 of the textbook).
+                        </p>
+                    </div>
+                    <button class="btn-primary mt-6 view-problems-btn" data-chapter="14">View Practice Problems</button>
+                </div>
+                <div class="card">
+                    <div>
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-3">Chapter 15: Fundamental Theorems of Vector Calculus</h3>
+                        <p class="text-gray-600">
+                            This chapter consolidates the major theorems of vector calculus, emphasizing their interconnections and applications.
+                            It focuses on the Divergence Theorem (Gauss's Theorem) and Stokes' Theorem, building on line and surface integrals.
+                            These theorems provide powerful tools for analyzing flows, flux, and circulation in three-dimensional space,
+                            essential for fields like fluid dynamics and electromagnetism.
+                            (For detailed lessons, examples, and exercises, refer to Chapter 15 of the textbook).
+                        </p>
+                    </div>
+                    <button class="btn-primary mt-6 view-problems-btn" data-chapter="15">View Practice Problems</button>
+                </div>
+                <div class="card">
+                    <div>
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-3">Chapter 16: Second-Order Differential Equations</h3>
+                        <p class="text-gray-600">
+                            Building on introductory differential equations, this chapter focuses on second-order linear differential equations,
+                            which are common in physics and engineering. Topics include homogeneous and nonhomogeneous equations,
+                            methods for solving them (e.g., undetermined coefficients, variation of parameters), and applications
+                            to systems like spring-mass systems and electrical circuits.
+                            (For detailed lessons, examples, and exercises, refer to Chapter 16 of the textbook).
+                        </p>
+                    </div>
+                    <button class="btn-primary mt-6 view-problems-btn" data-chapter="16">View Practice Problems</button>
+                </div>
+                 <div class="card">
+                    <div>
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-3">Appendices</h3>
+                        <p class="text-gray-600">
+                            The appendices typically contain valuable reference material, including proofs, additional mathematical tools,
+                            tables of integrals, and review sections for algebra or trigonometry that complement the main chapters.
+                            They serve as a useful resource for quick lookups and deeper understanding of foundational concepts.
+                            (For complete information, refer to the Appendices of the textbook).
+                        </p>
+                    </div>
+                    <button class="btn-primary mt-6 view-problems-btn" data-chapter="Appendices">View Practice Problems</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="formulas" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="section-title text-4xl text-center">Essential Calculus Formulas</h2>
+            <div class="max-w-4xl mx-auto text-lg leading-relaxed text-gray-700 space-y-6">
+                <p class="mb-4">
+                    Here are some fundamental differentiation and integration rules, along with key trigonometric identities.
+                    These formulas are crucial for solving calculus problems.
+                </p>
+
+                <h3 class="text-2xl font-semibold text-gray-800 mb-2">Basic Differentiation Rules</h3>
+                <ul class="list-disc list-inside space-y-2 pl-4">
+                    <li>$\frac{d}{dx}[cu]=cu^{\prime}$</li>
+                    <li>$\frac{d}{dx}[u\pm v]=u^{\prime}\pm v^{\prime}$</li>
+                    <li>$\frac{d}{dx}[uv]=uv^{\prime}+vu^{\prime}$</li>
+                    <li>$\frac{d}{dx}[\frac{u}{v}]=\frac{vu^{\prime}-uv^{\prime}}{v^{2}}$</li>
+                    <li>$\frac{d}{dx}[u^{n}]=nu^{n-1}u^{\prime}$</li>
+                    <li>$\frac{d}{dx}[sin~u]=(cos~u)u^{\prime}$</li>
+                    <li>$\frac{d}{dx}[cos~u]=-(sin~u)u^{\prime}$</li>
+                    <li>$\frac{d}{dx}[tan~u]=(sec^{2}u)u^{\prime}$</li>
+                    <li>$\frac{d}{dx}[e^{u}]=e^{u}u^{\prime}$</li>
+                    <li>$\frac{d}{dx}[ln~u]=\frac{u^{\prime}}{u}$</li>
+                </ul>
+
+                <h3 class="text-2xl font-semibold text-gray-800 mt-6 mb-2">Basic Integration Formulas</h3>
+                <ul class="list-disc list-inside space-y-2 pl-4">
+                    <li>$\int kf(u)du=k\int f(u)du$</li>
+                    <li>$\int u^{n}du=\frac{u^{n+1}}{n+1}+C, n\ne-1$</li>
+                    <li>$\int\frac{du}{u}=ln|u|+C$</li>
+                    <li>$\int e^{u}du=e^{u}+C$</li>
+                    <li>$\int sin~u~du=-cos~u+C$</li>
+                    <li>$\int cos~u~du=sin~u+C$</li>
+                    <li>$\int tan~u~du=-ln|cos~u|+C$</li>
+                    <li>$\int sec~u~du=ln|sec~u+tan~u|+C$</li>
+                    <li>$\int\frac{du}{\sqrt{a^{2}-u^{2}}}=arcsin\frac{u}{a}+C$</li>
+                    <li>$\int\frac{du}{a^{2}+u^{2}}=\frac{1}{a}arctan\frac{u}{a}+C$</li>
+                </ul>
+
+                <h3 class="text-2xl font-semibold text-gray-800 mt-6 mb-2">Key Trigonometric Identities</h3>
+                <ul class="list-disc list-inside space-y-2 pl-4">
+                    <li>$sin^{2}x+cos^{2}x=1$</li>
+                    <li>$1+tan^{2}x=sec^{2}x$</li>
+                    <li>$1+cot^{2}x=csc^{2}x$</li>
+                    <li>$sin(u\pm v)=sin~u~cos~v\pm cos~u~sin~v$</li>
+                    <li>$cos(u\pm v)=cos~u~cos~v\mp sin~u~sin~v$</li>
+                    <li>$tan(u\pm v)=\frac{tan~u\pm tan~v}{1\mp tan~u~tan~v}$</li>
+                </ul>
+                <p class="mt-4">
+                    For a more exhaustive list of formulas, refer to the textbook.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="applications" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="section-title text-4xl text-center">Real-World Applications of Calculus</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="card">
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-3">Physics & Engineering</h3>
+                    <ul class="list-disc list-inside text-gray-600 space-y-1 pl-4">
+                        <li>Acceleration, Velocity, Speed (pages 128, 155, 180)</li>
+                        <li>Projectile Motion (pages 164, 840)</li>
+                        <li>Fluid Force (pages 506-510)</li>
+                        <li>Work (page 485)</li>
+                        <li>Beam Deflection & Strength (page 226)</li>
+                        <li>Electric Circuits & Force Fields (pages 371, 1045)</li>
+                        <li>Kepler's Laws of Planetary Motion (pages 741, 866)</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-3">Optimization Problems</h3>
+                    <ul class="list-disc list-inside text-gray-600 space-y-1 pl-4">
+                        <li>Minimum Length, Perimeter, Surface Area, Time (pages 222, 224, 226)</li>
+                        <li>Maximum Volume & Area (pages 225, 463)</li>
+                        <li>Break-even Point Analysis (page 9)</li>
+                        <li>Inventory Cost Minimization (page 243)</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-3">Modeling & Data Analysis</h3>
+                    <ul class="list-disc list-inside text-gray-600 space-y-1 pl-4">
+                        <li>Modeling Carbon Dioxide Concentration (page 7)</li>
+                        <li>Population Growth & Decay (pages 352, 415)</li>
+                        <li>Sales Growth Prediction (page 198)</li>
+                        <li>Atmospheric Pressure & Altitude (page 323)</li>
+                        <li>Depreciation Models (page 349)</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-3">Geometry & Measurement</h3>
+                    <ul class="list-disc list-inside text-gray-600 space-y-1 pl-4">
+                        <li>Area of a Region Between Two Curves (page 444)</li>
+                        <li>Volume (Disk, Shell Methods) (pages 454, 465)</li>
+                        <li>Arc Length & Surfaces of Revolution (page 474)</li>
+                        <li>Center of Mass & Centroids (page 494)</li>
+                        <li>Curvature (page 858)</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-3">Economics & Business</h3>
+                    <ul class="list-disc list-inside text-gray-600 space-y-1 pl-4">
+                        <li>Average Price Calculation (page 332)</li>
+                        <li>Sales Rate of Change (page 332)</li>
+                        <li>Compound Interest (page 401)</li>
+                        <li>Mortgage Analysis (page 404)</li>
+                        <li>Cobb-Douglas Production Function (page 964)</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-3">Other Diverse Fields</h3>
+                    <ul class="list-disc list-inside text-gray-600 space-y-1 pl-4">
+                        <li>Air Traffic Control (page 158)</li>
+                        <li>Architecture & Bridge Design (page 698)</li>
+                        <li>Sound Intensity (page 44)</li>
+                        <li>Chemical Reactions (page 430)</li>
+                        <li>Meteorology (page 883)</li>
+                        <li>Hydraulics (page 1005)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="practice" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="section-title text-4xl">Enhance Your Calculus Practice</h2>
+            <p class="text-lg text-gray-700 mb-8 max-w-3xl mx-auto">
+                Mastering calculus requires consistent practice. While this website provides conceptual overviews,
+                the best way to solidify your understanding and develop problem-solving skills is through dedicated practice.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <div class="card text-left">
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-3">Utilize Your Textbook!</h3>
+                    <p class="text-gray-600 mb-4">
+                        "Calculus, 11th Edition, by Ron Larson & Bruce H. Edwards" is an invaluable resource for practice.
+                        Each section and chapter contains a wide array of carefully designed exercise problems, ranging from
+                        basic concept checks to challenging application-based scenarios.
+                    </p>
+                    <ul class="list-disc list-inside text-gray-600 space-y-2 pl-4">
+                        <li>**End-of-Section Exercises:** These are crucial for immediately applying newly learned concepts.</li>
+                        <li>**Review Exercises:** Found at the end of each chapter, these problems help you consolidate understanding across multiple sections.</li>
+                        <li>**Problem-Solving Focus:** The textbook often includes special sections or problems designed to enhance your critical thinking and problem-solving strategies.</li>
+                    </ul>
+                </div>
+                <div class="card text-left">
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-3">Leverage Digital Resources</h3>
+                    <p class="text-gray-600 mb-4">
+                        Your textbook subscription often comes with access to powerful digital tools specifically designed to aid your practice:
+                    </p>
+                    <ul class="list-disc list-inside text-gray-600 space-y-2 pl-4">
+                        <li>**Calc Chat®:** Offers step-by-step solutions to odd-numbered exercises from the textbook. (Check your textbook's cover or publisher's website for access details).</li>
+                        <li>**CalcView™:** Provides video solutions for selected exercises, demonstrating problem-solving techniques visually. (Access details typically found with your textbook).</li>
+                        <li>**Online Homework Platforms:** Many courses use platforms like WebAssign (from Cengage) that directly integrate with the textbook and offer interactive practice with immediate feedback.</li>
+                    </ul>
+                    <p class="text-gray-600 mt-4">
+                        Always refer to your textbook's front matter or your course instructor for precise access information to these resources.
+                    </p>
+                </div>
+            </div>
+
+            <h3 class="text-2xl font-semibold text-gray-800 mt-12 mb-4">Beyond the Textbook: General Practice Tips</h3>
+            <div class="max-w-3xl mx-auto text-lg leading-relaxed text-gray-700 space-y-4">
+                <p>
+                    <strong class="text-indigo-600">1. Master the Formulas:</strong> Regularly review and understand the derivation of key formulas. Practice applying them to simple, generic problems.
+                </p>
+                <p>
+                    <strong class="text-indigo-600">2. Conceptual Understanding:</strong> Before diving into problems, ensure you grasp the "why" behind each concept. Try to explain topics in your own words.
+                </p>
+                <p>
+                    <strong class="text-indigo-600">3. Work Through Examples:</strong> Carefully analyze the worked examples in your textbook. Understand each step before attempting similar problems.
+                </p>
+                <p>
+                    <strong class="text-indigo-600">4. Review and Reflect:</b> After attempting problems, review your solutions. Identify areas where you struggled and revisit the concepts or examples related to those areas.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="section-title text-4xl">Get in Touch</h2>
+            <p class="text-lg text-gray-700 mb-8 max-w-2xl mx-auto">
+                Have questions, suggestions, or just want to discuss calculus? Feel free to reach out!
+            </p>
+            <form class="max-w-lg mx-auto bg-white p-8 rounded-xl shadow-lg">
+                <div class="mb-6">
+                    <input type="text" id="name" name="name" placeholder="Your Name"
+                           class="w-full px-4 py-3 rounded-lg border-2 border-gray-300 focus:outline-none focus:border-indigo-500 transition duration-200" required>
+                </div>
+                <div class="mb-6">
+                    <input type="email" id="email" name="email" placeholder="Your Email"
+                           class="w-full px-4 py-3 rounded-lg border-2 border-gray-300 focus:outline-none focus:border-indigo-500 transition duration-200" required>
+                </div>
+                <div class="mb-6">
+                    <textarea id="message" name="message" rows="5" placeholder="Your Message"
+                              class="w-full px-4 py-3 rounded-lg border-2 border-gray-300 focus:outline-none focus:border-indigo-500 transition duration-200" required></textarea>
+                </div>
+                <button type="submit" class="btn-primary w-full text-xl font-semibold shadow-md hover:shadow-lg">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <footer class="footer-bg py-8 mt-12">
+        <div class="container mx-auto px-4 text-center text-sm">
+            <p>&copy; 2025 Calculus Hub. All rights reserved. Inspired by "Calculus, 11th Edition, by Ron Larson & Bruce H. Edwards."</p>
+            <p class="mt-2">Disclaimer: This website is for educational purposes only and is not affiliated with Cengage Learning or the authors.</p>
+        </div>
+    </footer>
+
+    <div id="practiceModal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close-btn" id="closeModal">&times;</button>
+            <h3 id="modalChapterTitle" class="text-3xl font-bold text-gray-900 mb-4"></h3>
+            <div id="modalProblemsContent" class="text-lg text-gray-700 space-y-4">
+                </div>
+        </div>
+    </div>
+
+    <script>
+        // Basic MathJax configuration
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <script>
+        // JavaScript for handling the practice problems modal
+        const practiceProblems = {
+            "P": [
+                {
+                    problem: "1. Find the equation of the line passing through points $(1, -2)$ and $(3, 4)$.",
+                },
+                {
+                    problem: "2. Simplify the expression: $(x+3)^2 - (x-3)^2$.",
+                },
+                {
+                    problem: "3. Solve for $x$: $3(x-1) + 2 = 8$.",
+                },
+                {
+                    problem: "4. If $f(x) = x^2 - 1$ and $g(x) = 2x+1$, find $f(g(x))$.",
+                },
+                {
+                    problem: "5. Evaluate $\\cos(\\frac{\\pi}{3})$ and $\\sin(\\frac{\\pi}{6})$.",
+                },
+                {
+                    problem: "6. Determine the domain and range of the function $f(x) = \\sqrt{x-3}$.",
+                },
+                {
+                    problem: "7. Factor the quadratic expression $x^2 + 5x + 6$.",
+                },
+                {
+                    problem: "8. Solve the system of linear equations: $2x + y = 7$, $x - y = 2$.",
+                },
+                {
+                    problem: "9. Find the distance between the points $( -2, 1)$ and $(3, 4)$.",
+                },
+                {
+                    problem: "10. Write the equation of a circle with center $(0,0)$ and radius $5$.",
+                },
+                {
+                    problem: "11. Evaluate $\\log_2(8)$.",
+                },
+                {
+                    problem: "12. Expand $(2x - y)^3$.",
+                },
+                {
+                    problem: "13. Find the inverse function of $f(x) = 3x - 5$.",
+                },
+                {
+                    problem: "14. Convert $270^{\\circ}$ to radians.",
+                },
+                {
+                    problem: "15. Simplify $\\frac{x^2 - 4}{x - 2}$.",
+                },
+                {
+                    problem: "16. Find the value of $x$ if $2^{x+1} = 16$.",
+                },
+                {
+                    problem: "17. Determine if the function $f(x) = x^2$ is even, odd, or neither.",
+                },
+                {
+                    problem: "18. Find the equation of the line perpendicular to $y = 2x + 1$ and passing through $(4, 0)$.",
+                },
+                {
+                    problem: "19. Solve for $x$: $|x - 3| = 5$.",
+                },
+                {
+                    problem: "20. Graph the parabola $y = x^2 - 4$.",
+                },
+                {
+                    problem: "21. Find the exact value of $\\tan(\\frac{\\pi}{4})$.",
+                },
+                {
+                    problem: "22. Rationalize the denominator: $\\frac{1}{\\sqrt{2}}$.",
+                },
+                {
+                    problem: "23. If $\\log_b(x) = 3$ and $\\log_b(y) = 2$, find $\\log_b(xy)$.",
+                },
+                {
+                    problem: "24. Find the vertex of the parabola $y = x^2 - 6x + 5$.",
+                },
+                {
+                    problem: "25. Determine the intercepts of the equation $y = x^2 - 9$.",
+                },
+                {
+                    problem: "26. Simplify $\\frac{a^3b^2}{ab^4}$.",
+                },
+                {
+                    problem: "27. Find the value of $x$ in the right triangle with hypotenuse 10 and one leg 6.",
+                },
+                {
+                    problem: "28. Write the equation of a line with slope $-3$ and y-intercept $2$.",
+                },
+                {
+                    problem: "29. Solve the quadratic equation $x^2 - 5x + 6 = 0$.",
+                },
+                {
+                    problem: "30. Find the composition $(g \\circ f)(x)$ if $f(x) = x+1$ and $g(x) = x^2$.",
+                },
+                {
+                    problem: "31. Convert $\\frac{3\\pi}{4}$ radians to degrees.",
+                },
+                {
+                    problem: "32. Find the domain of $f(x) = \\frac{1}{x-2}$.",
+                },
+                {
+                    problem: "33. Simplify $\\sqrt{75}$.",
+                },
+                {
+                    problem: "34. If $\\sin(\\theta) = 0.5$ and $\\theta$ is in the first quadrant, find $\\cos(\\theta)$.",
+                },
+                {
+                    problem: "35. Solve for $x$: $5^{x} = 125$.",
+                },
+                {
+                    problem: "36. Find the midpoint of the segment connecting $(1, 2)$ and $(5, 8)$.",
+                },
+                {
+                    problem: "37. Determine if the relation $x^2 + y^2 = 1$ is a function.",
+                },
+                {
+                    problem: "38. Find the equation of the line parallel to $y = -x + 3$ and passing through $(1, 1)$.",
+                },
+                {
+                    problem: "39. Solve the inequality $x^2 - 9 < 0$.",
+                },
+                {
+                    problem: "40. Graph the exponential function $y = 2^x$.",
+                },
+                {
+                    problem: "41. Find the exact value of $\\csc(\\frac{\\pi}{6})$.",
+                },
+                {
+                    problem: "42. Rationalize the denominator: $\\frac{2}{\\sqrt{3} - 1}$.",
+                },
+                {
+                    problem: "43. If $\\log(x) = 2$, find $x$.",
+                },
+                {
+                    problem: "44. Find the slope of the line $3x + 4y = 12$.",
+                },
+                {
+                    problem: "45. Determine the value of $x$ if $\\log_x(25) = 2$.",
+                }
+            ],
+            "1": [
+                {
+                    problem: "1. Evaluate $\\lim_{x \\to 4} (\\frac{x^2 - 16}{x - 4})$.",
+                },
+                {
+                    problem: "2. Find $\\lim_{x \\to 0} \\frac{\\sin(5x)}{x}$.",
+                },
+                {
+                    problem: "3. Determine if $f(x) = \\begin{cases} x^2+1 & x < 2 \\\\ 3x-1 & x \\ge 2 \\end{cases}$ is continuous at $x=2$.",
+                },
+                {
+                    problem: "4. Evaluate $\\lim_{x \\to \\infty} \\frac{2x^3 - 5x + 1}{4x^3 + 2x^2 - 7}$.",
+                },
+                {
+                    problem: "5. Find $\\lim_{x \\to 0} \\frac{\\sqrt{x+9}-3}{x}$.",
+                },
+                {
+                    problem: "6. Evaluate $\\lim_{x \\to -1} (x^4 + 3x^2 - 2)$.",
+                },
+                {
+                    problem: "7. Find $\\lim_{x \\to 3^+} \\frac{1}{x-3}$.",
+                },
+                {
+                    problem: "8. Determine the horizontal asymptotes of $f(x) = \\frac{2x^2 - 3}{x^2 + 1}$.",
+                },
+                {
+                    problem: "9. Find $\\lim_{x \\to 0} \\frac{\\tan(x)}{x}$.",
+                },
+                {
+                    problem: "10. Evaluate $\\lim_{x \\to 2} \\frac{x^3 - 8}{x - 2}$.",
+                },
+                {
+                    problem: "11. For what value of $c$ is $f(x) = \\begin{cases} cx+1 & x < 3 \\\\ x^2 & x \\ge 3 \\end{cases}$ continuous at $x=3$?",
+                },
+                {
+                    problem: "12. Evaluate $\\lim_{x \\to -2} \\frac{|x+2|}{x+2}$.",
+                },
+                {
+                    problem: "13. Find the vertical asymptotes of $f(x) = \\frac{x+1}{x^2 - 4}$.",
+                },
+                {
+                    problem: "14. Evaluate $\\lim_{x \\to 0} \\frac{1 - \\cos(x)}{x^2}$.",
+                },
+                {
+                    problem: "15. Find $\\lim_{h \\to 0} \\frac{(x+h)^2 - x^2}{h}$.",
+                },
+                {
+                    problem: "16. Evaluate $\\lim_{x \\to 5} \\frac{x^2 - 25}{\\sqrt{x} - \\sqrt{5}}$.",
+                },
+                {
+                    problem: "17. Determine if the Intermediate Value Theorem applies to $f(x) = x^3 - x - 1$ on $[0, 2]$ for $f(c) = 0$.",
+                },
+                {
+                    problem: "18. Find $\\lim_{x \\to \\infty} (\\sqrt{x^2 + x} - x)$.",
+                },
+                {
+                    problem: "19. Evaluate $\\lim_{x \\to 0} x \\cot(x)$.",
+                },
+                {
+                    problem: "20. Find $\\lim_{x \\to 1^-} \\frac{1}{x-1}$.",
+                },
+                {
+                    problem: "21. Evaluate $\\lim_{x \\to 0} \\frac{\\sin(ax)}{\\sin(bx)}$.",
+                },
+                {
+                    problem: "22. Determine the points of discontinuity for $f(x) = \\frac{x+2}{x^2 - x - 6}$.",
+                },
+                {
+                    problem: "23. Find $\\lim_{x \\to 4} \\frac{x-4}{\\sqrt{x}-2}$.",
+                },
+                {
+                    problem: "24. Evaluate $\\lim_{x \\to 0} \\frac{e^x - 1}{x}$.",
+                },
+                {
+                    problem: "25. Find $\\lim_{x \\to \\infty} (\\frac{x^2+1}{x+1})$.",
+                },
+                {
+                    problem: "26. Evaluate $\\lim_{x \\to 0} \\frac{\\tan(3x)}{2x}$.",
+                },
+                {
+                    problem: "27. Determine if $f(x) = |x|$ is continuous at $x=0$.",
+                },
+                {
+                    problem: "28. Find $\\lim_{x \\to 1} \\frac{x^3 - 1}{x - 1}$.",
+                },
+                {
+                    problem: "29. Evaluate $\\lim_{x \\to 0} \\frac{\\sin^2(x)}{x^2}$.",
+                },
+                {
+                    problem: "30. Find $\\lim_{x \\to 0} \\frac{\\cos(x) - 1}{x}$.",
+                },
+                {
+                    problem: "31. Evaluate $\\lim_{x \\to -3} \\frac{x^2+x-6}{x+3}$.",
+                },
+                {
+                    problem: "32. Determine the behavior of $f(x) = \\frac{1}{x^2}$ as $x \\to 0$.",
+                },
+                {
+                    problem: "33. Find $\\lim_{x \\to \\infty} \\frac{\\ln(x)}{x}$.",
+                },
+                {
+                    problem: "34. Evaluate $\\lim_{x \\to 1^+} \\frac{x}{x-1}$.",
+                },
+                {
+                    problem: "35. Find $\\lim_{x \\to 0} \\frac{\\sqrt{1+x}-1}{x}$.",
+                },
+                {
+                    problem: "36. Evaluate $\\lim_{x \\to 2} \\frac{x^2 - 4x + 4}{x-2}$.",
+                },
+                {
+                    problem: "37. For what values of $x$ is $f(x) = \\frac{1}{\\sin(x)}$ discontinuous?",
+                },
+                {
+                    problem: "38. Find $\\lim_{x \\to \\infty} \\frac{e^x}{x}$.",
+                },
+                {
+                    problem: "39. Evaluate $\\lim_{x \\to 0} \\frac{\\sin(x) - x}{x}$.",
+                },
+                {
+                    problem: "40. Find $\\lim_{x \\to 4} \\frac{x-4}{x^2 - 16}$.",
+                },
+                {
+                    problem: "41. Evaluate $\\lim_{x \\to 0} \\frac{\\tan(x) - x}{x}$.",
+                },
+                {
+                    problem: "42. Determine if $f(x) = \\frac{1}{x}$ is continuous on $(0, \\infty)$.",
+                },
+                {
+                    problem: "43. Find $\\lim_{x \\to 0} \\frac{\\sin(x)}{x \\cos(x)}$.",
+                },
+                {
+                    problem: "44. Evaluate $\\lim_{x \\to 1} \\frac{\\ln(x)}{x-1}$.",
+                },
+                {
+                    problem: "45. Find $\\lim_{x \\to \\infty} (\\frac{x^3 - 2x + 1}{x^2 + 5})$.",
+                }
+            ],
+            "2": [
+                {
+                    problem: "1. Find the derivative of $f(x) = 7x^5 - 3x^2 + 9$.",
+                },
+                {
+                    problem: "2. Differentiate $g(x) = (x^3 - 2)(\\cos(x))$.",
+                },
+                {
+                    problem: "3. Use the Chain Rule to find $\\frac{dy}{dx}$ for $y = e^{\\tan(x)}$.",
+                },
+                {
+                    problem: "4. Find the third derivative of $h(x) = x^6 - 4x^3 + x$.",
+                },
+                {
+                    problem: "5. Find $\\frac{dy}{dx}$ implicitly for $x^3 + y^3 = 6xy$.",
+                },
+                {
+                    problem: "6. Find the derivative of $f(x) = \\sqrt{x} + \\frac{1}{x}$.",
+                },
+                {
+                    problem: "7. Differentiate $y = \\frac{\\sin(x)}{x^2}$.",
+                },
+                {
+                    problem: "8. Find the derivative of $f(x) = \\ln(x^2 + 4)$.",
+                },
+                {
+                    problem: "9. If $s(t) = t^3 - 6t^2 + 9t$ is the position function, find the velocity and acceleration functions.",
+                },
+                {
+                    problem: "10. Find the equation of the tangent line to $y = x^2 - 3x$ at $x=2$.",
+                },
+                {
+                    problem: "11. Differentiate $y = (3x^2 - 2x)^4$.",
+                },
+                {
+                    problem: "12. Find the derivative of $f(x) = \\arctan(2x)$.",
+                },
+                {
+                    problem: "13. If $f(x) = x^2 \\sin(x)$, find $f'(x)$.",
+                },
+                {
+                    problem: "14. Differentiate $y = \\sec(x^2)$.",
+                },
+                {
+                    problem: "15. Find $\\frac{d}{dx} (\\frac{e^x}{x})$.",
+                },
+                {
+                    problem: "16. Find the derivative of $f(x) = \\log_{10}(x)$.",
+                },
+                {
+                    problem: "17. If $y = \\cos^2(x)$, find $\\frac{dy}{dx}$.",
+                },
+                {
+                    problem: "18. Differentiate $f(x) = \\frac{1}{\\sqrt{x^2+1}}$.",
+                },
+                {
+                    problem: "19. Find the derivative of $y = x \\ln(x) - x$.",
+                },
+                {
+                    problem: "20. If $f(x) = \\sqrt[3]{x}$, find $f'(x)$.",
+                },
+                {
+                    problem: "21. Differentiate $y = \\frac{x}{x+1}$.",
+                },
+                {
+                    problem: "22. Find the derivative of $f(x) = \\sin(\\cos(x))$.",
+                },
+                {
+                    problem: "23. If $y = \\tan^{-1}(x)$, find $\\frac{dy}{dx}$.",
+                },
+                {
+                    problem: "24. Find the derivative of $f(x) = (x^2+x+1)^3$.",
+                },
+                {
+                    problem: "25. Differentiate $y = \\frac{\\ln(x)}{x}$.",
+                },
+                {
+                    problem: "26. Find $\\frac{d}{dx} (\\sin(x) \\cos(x))$.",
+                },
+                {
+                    problem: "27. If $f(x) = \\frac{x^2}{e^x}$, find $f'(x)$.",
+                },
+                {
+                    problem: "28. Differentiate $y = \\sqrt{\\sin(x)}$.",
+                },
+                {
+                    problem: "29. Find the derivative of $f(x) = \\log_a(x)$.",
+                },
+                {
+                    problem: "30. If $y = \\arcsin(x^2)$, find $\\frac{dy}{dx}$.",
+                },
+                {
+                    problem: "31. Differentiate $f(x) = x^x$.",
+                },
+                {
+                    problem: "32. Find the derivative of $y = \\frac{1}{x^3 - 2x}$.",
+                },
+                {
+                    problem: "33. If $f(x) = \\sec(x) + \\tan(x)$, find $f'(x)$.",
+                },
+                {
+                    problem: "34. Differentiate $y = \\frac{\\cos(x)}{1 - \\sin(x)}$.",
+                },
+                {
+                    problem: "35. Find the derivative of $f(x) = \\ln(\\sec(x) + \\tan(x))$.",
+                },
+                {
+                    problem: "36. If $y = \\sqrt{x^2 + 2x + 5}$, find $\\frac{dy}{dx}$.",
+                },
+                {
+                    problem: "37. Differentiate $f(x) = (x^2+1)e^{-x}$.",
+                },
+                {
+                    problem: "38. Find the derivative of $y = \\frac{x^3 - 1}{x^3 + 1}$.",
+                },
+                {
+                    problem: "39. If $f(x) = \\sin(x^3)$, find $f'(x)$.",
+                },
+                {
+                    problem: "40. Differentiate $y = \\frac{\\sqrt{x}}{x+1}$.",
+                },
+                {
+                    problem: "41. Find the derivative of $f(x) = \\ln(\\frac{x}{x+1})$.",
+                },
+                {
+                    problem: "42. If $y = \\csc(4x)$, find $\\frac{dy}{dx}$.",
+                },
+                {
+                    problem: "43. Differentiate $f(x) = e^{\\sqrt{x}}$.",
+                },
+                {
+                    problem: "44. Find the derivative of $y = \\frac{1}{\\tan(x)}$.",
+                },
+                {
+                    problem: "45. If $f(x) = \\cos(e^x)$, find $f'(x)$.",
+                }
+            ],
+            "3": [
+                {
+                    problem: "1. Find the critical points of $f(x) = x^3 - 6x^2 + 5$.",
+                },
+                {
+                    problem: "2. Determine the intervals where $f(x) = x^4 - 2x^2$ is increasing or decreasing.",
+                },
+                {
+                    problem: "3. Find the local extrema of $f(x) = x^4 - 8x^2 + 16.",
+                },
+                {
+                    problem: "4. A cylindrical can is to be made to hold 1 liter (1000 cm$^3$) of oil. Find the dimensions that will minimize the cost of the metal to make the can.",
+                },
+                {
+                    problem: "5. Use Newton's Method to approximate the root of $f(x) = x^3 - x - 1$ starting with $x_0 = 1$ (perform one iteration).",
+                },
+                {
+                    problem: "6. Find the absolute maximum and minimum values of $f(x) = x^3 - 3x^2 + 1$ on the interval $[-1, 4]$.",
+                },
+                {
+                    problem: "7. State Rolle's Theorem and verify it for $f(x) = x^2 - 4x + 3$ on $[1, 3]$.",
+                },
+                {
+                    problem: "8. State the Mean Value Theorem and find the value(s) of $c$ that satisfy the theorem for $f(x) = x^2$ on $[0, 2]$.",
+                },
+                {
+                    problem: "9. Determine the intervals of concavity and points of inflection for $f(x) = x^4 - 4x^3$.",
+                },
+                {
+                    problem: "10. Sketch the graph of a function that has a local maximum at $x=1$ and a local minimum at $x=3$.",
+                },
+                {
+                    problem: "11. A farmer has 200 feet of fencing to enclose a rectangular area and divide it into two equal pens with a fence parallel to one side. What dimensions will maximize the area?",
+                },
+                {
+                    problem: "12. Find the dimensions of the rectangle of largest area that can be inscribed in a semicircle of radius $r$.",
+                },
+                {
+                    problem: "13. An open box is to be made from a 12x12 inch piece of cardboard by cutting out squares from the corners and folding up the sides. What size squares should be cut out to maximize the volume?",
+                },
+                {
+                    problem: "14. Find the point on the graph of $y = \\sqrt{x}$ that is closest to the point $(2, 0)$.",
+                },
+                {
+                    problem: "15. If the position of a particle is given by $s(t) = t^3 - 6t^2 + 9t$, find the time intervals when the particle is speeding up or slowing down.",
+                },
+                {
+                    problem: "16. Find the minimum distance from the point $(0, 1)$ to the parabola $y = x^2$.",
+                },
+                {
+                    problem: "17. A company manufactures $x$ units of a product. The cost function is $C(x) = 1000 + 10x + 0.2x^2$. Find the production level that minimizes the average cost.",
+                },
+                {
+                    problem: "18. Sketch the graph of $f(x) = \\frac{x^2}{x^2+1}$, identifying all asymptotes, intercepts, and local extrema.",
+                },
+                {
+                    problem: "19. Find the absolute maximum and minimum values of $f(x) = \\sin(x) - \\cos(x)$ on $[0, \\pi]$.",
+                },
+                {
+                    problem: "20. A ladder 25 ft long is leaning against a vertical wall. If the bottom of the ladder slides away from the wall at a rate of 2 ft/s, how fast is the top of the ladder sliding down the wall when the bottom is 7 ft from the wall?",
+                },
+                {
+                    problem: "21. Find the dimensions of the cone of maximum volume that can be inscribed in a sphere of radius $R$.",
+                },
+                {
+                    problem: "22. Use the first derivative test to find the local extrema of $f(x) = x^4 - 4x^2 + 3.",
+                },
+                {
+                    problem: "23. Use the second derivative test to classify the critical points of $f(x) = x^3 - 3x$.",
+                },
+                {
+                    problem: "24. Find the values of $a$ and $b$ such that $f(x) = ax^3 + bx^2$ has a local minimum at $(-1, -1)$.",
+                },
+                {
+                    problem: "25. A spherical balloon is inflated with air at a rate of 10 cm$^3$/s. How fast is the radius increasing when the radius is 5 cm?",
+                },
+                {
+                    problem: "26. Find the largest product of two positive numbers whose sum is 20.",
+                },
+                {
+                    problem: "27. Determine if $f(x) = x^{2/3}$ satisfies the conditions of the Mean Value Theorem on $[-1, 1]$.",
+                },
+                {
+                    problem: "28. Sketch a graph of a function $f$ such that $f'(x) > 0$ for all $x$, and $f''(x) < 0$ for $x < 0$ and $f''(x) > 0$ for $x > 0$.",
+                },
+                {
+                    problem: "29. Find the minimum perimeter of a rectangle with area 16 square units.",
+                },
+                {
+                    problem: "30. A boat is pulled toward a dock by a rope with one end attached to the front of the boat and the other end passing through a ring on the dock 6 ft above the front of the boat. The rope is hauled in at a rate of 2 ft/s. How fast is the boat approaching the dock when 10 ft of rope are out?",
+                },
+                {
+                    problem: "31. Find the point(s) of inflection for $f(x) = x^4 - 2x^3 - 12x^2 + 1$.",
+                },
+                {
+                    problem: "32. Use linear approximation to estimate $\\sqrt{4.1}$.",
+                },
+                {
+                    problem: "33. A box with a square base and open top is to have a volume of 32,000 cm$^3$. Find the dimensions of the box that minimize the amount of material used.",
+                },
+                {
+                    problem: "34. Find the maximum value of $f(x) = x e^{-x}$ on $[0, \\infty)$.",
+                },
+                {
+                    problem: "35. A man walks along a straight path at a speed of 4 ft/s. A searchlight is located on the ground 20 ft from the path and is kept focused on the man. At what rate is the searchlight rotating when the man is 15 ft from the point on the path closest to the searchlight?",
+                },
+                {
+                    problem: "36. Find the maximum area of a rectangle whose base is on the x-axis and whose upper two vertices lie on the parabola $y = 12 - x^2$.",
+                },
+                {
+                    problem: "37. Determine the intervals where $f(x) = x \\ln(x)$ is concave up or down.",
+                },
+                {
+                    problem: "38. Find the minimum value of $f(x) = x + \\frac{4}{x}$ for $x > 0$.",
+                },
+                {
+                    problem: "39. A conical tank (vertex down) has a radius of 5 ft and a height of 10 ft. Water is being pumped into the tank at a rate of 3 ft$^3$/min. How fast is the water level rising when the water is 6 ft deep?",
+                },
+                {
+                    problem: "40. Find the dimensions of the largest rectangle that can be inscribed in a circle of radius $R$.",
+                },
+                {
+                    problem: "41. Use differentials to estimate the change in the volume of a sphere when its radius changes from 5 cm to 5.1 cm.",
+                },
+                {
+                    problem: "42. Find the absolute extrema of $f(x) = \\frac{\\ln(x)}{x}$ on $[1, 3]$.",
+                },
+                {
+                    problem: "43. A rectangular page is to contain 30 square inches of print. The margins at the top and bottom of the page are each 1 inch wide. The margins on each side are 0.5 inch wide. Find the dimensions of the page so that the least amount of paper is used.",
+                },
+                {
+                    problem: "44. Find the rate of change of the area of a circle with respect to its radius when the radius is 4 cm.",
+                },
+                {
+                    problem: "45. Show that $f(x) = x^3 + x - 1$ has exactly one real root.",
+                }
+            ],
+            "4": [
+                {
+                    problem: "1. Evaluate $\\int (x^3 - 2x^2 + 5) dx$.",
+                },
+                {
+                    problem: "2. Calculate the definite integral $\\int_{0}^{3} (x^2 + 2x) dx$.",
+                },
+                {
+                    problem: "3. Find the average value of $f(x) = \\sin(x)$ on the interval $[0, \\pi]$.",
+                },
+                {
+                    problem: "4. Evaluate $\\int e^{3x} dx$.",
+                },
+                {
+                    problem: "5. Use a substitution to evaluate $\\int x^2 \\sqrt{x^3+1} dx$.",
+                },
+                {
+                    problem: "6. Find the antiderivative of $f(x) = \\frac{1}{x} + \\cos(x)$.",
+                },
+                {
+                    problem: "7. Evaluate $\\int (\\sec^2 x - \\csc x \\cot x) dx$.",
+                },
+                {
+                    problem: "8. Calculate $\\int_{1}^{e} \\frac{1}{x} dx$.",
+                },
+                {
+                    problem: "9. Find the indefinite integral of $f(x) = (2x+1)^4$.",
+                },
+                {
+                    problem: "10. Evaluate $\\int \\frac{x}{x^2+1} dx$.",
+                },
+                {
+                    problem: "11. Find the definite integral $\\int_{0}^{\\pi/2} \\cos(x) dx$.",
+                },
+                {
+                    problem: "12. Evaluate $\\int \\frac{1}{\\sqrt{1-x^2}} dx$.",
+                },
+                {
+                    problem: "13. Find the antiderivative of $f(x) = \\tan(x)$.",
+                },
+                {
+                    problem: "14. Evaluate $\\int (x^2 + \\frac{1}{x^2}) dx$.",
+                },
+                {
+                    problem: "15. Calculate $\\int_{0}^{1} e^{-x} dx$.",
+                },
+                {
+                    problem: "16. Find the integral of $f(x) = \\frac{\\ln(x)}{x}$.",
+                },
+                {
+                    problem: "17. Evaluate $\\int \\sin^2(x) \\cos(x) dx$.",
+                },
+                {
+                    problem: "18. Find the definite integral $\\int_{0}^{1} x e^{x^2} dx$.",
+                },
+                {
+                    problem: "19. Evaluate $\\int \\frac{1}{x \\ln(x)} dx$.",
+                },
+                {
+                    problem: "20. Calculate $\\int_{0}^{1} \\frac{1}{1+x^2} dx$.",
+                },
+                {
+                    problem: "21. Find the antiderivative of $f(x) = \\cot(x)$.",
+                },
+                {
+                    problem: "22. Evaluate $\\int \\frac{e^x}{e^x + 1} dx$.",
+                },
+                {
+                    problem: "23. Calculate $\\int_{0}^{\\pi/4} \\sec^2(x) dx$.",
+                },
+                {
+                    problem: "24. Find the integral of $f(x) = \\frac{x^3 - 2x^2 + 1}{x}$.",
+                },
+                {
+                    problem: "25. Evaluate $\\int \\frac{\\sin(x)}{\\cos(x)} dx$.",
+                },
+                {
+                    problem: "26. Calculate $\\int_{0}^{1} (x - \\sqrt{x}) dx$.",
+                },
+                {
+                    problem: "27. Find the antiderivative of $f(x) = \\frac{1}{x^2 + 4}$.",
+                },
+                {
+                    problem: "28. Evaluate $\\int \\frac{\\cos(x)}{\\sin^2(x)} dx$.",
+                },
+                {
+                    problem: "29. Calculate $\\int_{1}^{2} \\frac{x^2 + 1}{x} dx$.",
+                },
+                {
+                    problem: "30. Find the integral of $f(x) = x \\sec^2(x^2)$.",
+                },
+                {
+                    problem: "31. Evaluate $\\int (\\tan(x) + \\cot(x))^2 dx$.",
+                },
+                {
+                    problem: "32. Calculate $\\int_{0}^{1} (e^x + e^{-x}) dx$.",
+                },
+                {
+                    problem: "33. Find the antiderivative of $f(x) = \\frac{1}{\\sqrt{4-x^2}}$.",
+                },
+                {
+                    problem: "34. Evaluate $\\int x \\sqrt{x+1} dx$.",
+                },
+                {
+                    problem: "35. Calculate $\\int_{0}^{\\pi} \\sin(x) dx$.",
+                },
+                {
+                    problem: "36. Find the integral of $f(x) = \\frac{1}{x^2 - 4}$.",
+                },
+                {
+                    problem: "37. Evaluate $\\int \\frac{x+1}{x^2+2x+5} dx$.",
+                },
+                {
+                    problem: "38. Calculate $\\int_{0}^{1} x(x-1) dx$.",
+                },
+                {
+                    problem: "39. Find the integral of $f(x) = \\frac{1}{x \\sqrt{\\ln(x)}}$.",
+                },
+                {
+                    problem: "40. Evaluate $\\int \\frac{\\sin(\\sqrt{x})}{\\sqrt{x}} dx$.",
+                },
+                {
+                    problem: "41. Calculate $\\int_{0}^{1} \\frac{e^x}{1+e^x} dx$.",
+                },
+                {
+                    problem: "42. Find the antiderivative of $f(x) = \\frac{1}{x^2 - 2x + 2}$.",
+                },
+                {
+                    problem: "43. Evaluate $\\int x \\cos(x^2) dx$.",
+                },
+                {
+                    problem: "44. Calculate $\\int_{0}^{\\pi/2} \\sin(2x) dx$.",
+                },
+                {
+                    problem: "45. Find the integral of $f(x) = \\frac{\\cos(x)}{1+\\sin^2(x)}$.",
+                }
+            ],
+            "5": [
+                {
+                    problem: "1. Differentiate $f(x) = \\ln(x^3 + 1)$.",
+                },
+                {
+                    problem: "2. Evaluate $\\int \\frac{e^{2x}}{e^{2x}+5} dx$.",
+                },
+                {
+                    problem: "3. Find the derivative of $y = x e^{4x}$.",
+                },
+                {
+                    problem: "4. Evaluate $\\int \\frac{\\ln(x)}{x} dx$.",
+                },
+                {
+                    problem: "5. Differentiate $f(x) = \\log_{10}(x^2)$.",
+                },
+                {
+                    problem: "6. Evaluate $\\lim_{x \\to 0} \\frac{e^x - 1}{x}$ using L'Hôpital's Rule.",
+                },
+                {
+                    problem: "7. Find the derivative of $y = \\arcsin(e^x)$.",
+                },
+                {
+                    problem: "8. Evaluate $\\int \\frac{1}{\\sqrt{1-4x^2}} dx$.",
+                },
+                {
+                    problem: "9. Differentiate $f(x) = (\\ln x)^3$.",
+                },
+                {
+                    problem: "10. Evaluate $\\int \\frac{\\sec^2(x)}{\\tan(x)} dx$.",
+                },
+                {
+                    problem: "11. Find the derivative of $y = \\arctan(\\sqrt{x})$.",
+                },
+                {
+                    problem: "12. Evaluate $\\lim_{x \\to \\infty} \\frac{\\ln(x)}{x^2}$ using L'Hôpital's Rule.",
+                },
+                {
+                    problem: "13. Differentiate $f(x) = 2^x$.",
+                },
+                {
+                    problem: "14. Evaluate $\\int 3^x dx$.",
+                },
+                {
+                    problem: "15. Find the derivative of $y = \\cosh(x^2)$.",
+                },
+                {
+                    problem: "16. Evaluate $\\int \\sinh(3x) dx$.",
+                },
+                {
+                    problem: "17. Differentiate $f(x) = \\ln(\\frac{x+1}{x-1})$.",
+                },
+                {
+                    problem: "18. Evaluate $\\int \\frac{1}{x \\ln x} dx$.",
+                },
+                {
+                    problem: "19. Find the derivative of $y = e^{\\sin(x)}$.",
+                },
+                {
+                    problem: "20. Evaluate $\\int \\frac{\\cos(x)}{e^{\\sin(x)}} dx$.",
+                },
+                {
+                    problem: "21. Differentiate $f(x) = \\log_2(\\log_3(x))$.",
+                },
+                {
+                    problem: "22. Evaluate $\\lim_{x \\to 0^+} x \\ln(x)$ using L'Hôpital's Rule.",
+                },
+                {
+                    problem: "23. Find the derivative of $y = x^{\\sin(x)}$.",
+                },
+                {
+                    problem: "24. Evaluate $\\int \\frac{e^x - e^{-x}}{e^x + e^{-x}} dx$.",
+                },
+                {
+                    problem: "25. Differentiate $f(x) = \\text{arcsec}(x)$.",
+                },
+                {
+                    problem: "26. Evaluate $\\int \\frac{1}{x\\sqrt{x^2-1}} dx$.",
+                },
+                {
+                    problem: "27. Find the derivative of $y = \\text{sech}(x)$.",
+                },
+                {
+                    problem: "28. Evaluate $\\int \\text{tanh}(x) dx$.",
+                },
+                {
+                    problem: "29. Differentiate $f(x) = (x^2+1)^{\\ln x}$.",
+                },
+                {
+                    problem: "30. Evaluate $\\lim_{x \\to \\infty} (1 + \\frac{1}{x})^x$.",
+                },
+                {
+                    problem: "31. Find the derivative of $y = \\text{arccosh}(x)$.",
+                },
+                {
+                    problem: "32. Evaluate $\\int \\frac{1}{\\sqrt{x^2+1}} dx$.",
+                },
+                {
+                    problem: "33. Differentiate $f(x) = \\ln(\\sqrt{x^2+1})$.",
+                },
+                {
+                    problem: "34. Evaluate $\\int \\frac{x}{x^4+1} dx$.",
+                },
+                {
+                    problem: "35. Find the derivative of $y = \\text{csch}(x)$.",
+                },
+                {
+                    problem: "36. Evaluate $\\int \\text{coth}(x) dx$.",
+                },
+                {
+                    problem: "37. Differentiate $f(x) = \\log_a(g(x))$.",
+                },
+                {
+                    problem: "38. Evaluate $\\lim_{x \\to 0} (1+x)^{1/x}$.",
+                },
+                {
+                    problem: "39. Find the derivative of $y = \\text{arccoth}(x)$.",
+                },
+                {
+                    problem: "40. Evaluate $\\int \\frac{1}{x^2-1} dx$.",
+                },
+                {
+                    problem: "41. Differentiate $f(x) = \\ln(\\ln(\\ln x))$.",
+                },
+                {
+                    problem: "42. Evaluate $\\lim_{x \\to 0} \\frac{\\tan x - x}{x^3}$ using L'Hôpital's Rule.",
+                },
+                {
+                    problem: "43. Find the derivative of $y = e^{e^x}$.",
+                },
+                {
+                    problem: "44. Evaluate $\\int \\frac{dx}{x \\ln x \\ln(\\ln x)}$.",
+                },
+                {
+                    problem: "45. Differentiate $f(x) = \\text{arcsinh}(x^2)$.",
+                }
+            ],
+            "6": [
+                {
+                    problem: "1. Verify that $y = Ce^{-x}$ is a solution to the differential equation $\\frac{dy}{dx} = -y$.",
+                },
+                {
+                    problem: "2. Find the general solution of the differential equation $\\frac{dy}{dx} = x^2 y$.",
+                },
+                {
+                    problem: "3. Solve the initial value problem $\\frac{dy}{dx} = 2x$, $y(0) = 3$.",
+                },
+                {
+                    problem: "4. A population grows at a rate proportional to its current size. If the population doubles every 10 years and the initial population is 100, find the population after $t$ years.",
+                },
+                {
+                    problem: "5. Sketch the slope field for the differential equation $\\frac{dy}{dx} = x+y$.",
+                },
+                {
+                    problem: "6. Solve the differential equation $(x^2+1)\\frac{dy}{dx} = xy$.",
+                },
+                {
+                    problem: "7. Find the general solution of the differential equation $\\frac{dy}{dx} = \\frac{x}{y}$.",
+                },
+                {
+                    problem: "8. A substance decays at a rate proportional to the amount present. If there are 100g initially and 80g after 5 days, how much will there be after 20 days?",
+                },
+                {
+                    problem: "9. Use Euler's Method with step size $h=0.1$ to approximate $y(0.2)$ for $\\frac{dy}{dx} = x+y$, $y(0)=1$.",
+                },
+                {
+                    problem: "10. Solve the differential equation $\\frac{dy}{dx} = e^{x-y}$.",
+                },
+                {
+                    problem: "11. Find the general solution of $\\frac{dy}{dx} = y \\cos(x)$.",
+                },
+                {
+                    problem: "12. A bacterial culture grows at a rate proportional to the number of bacteria present. If there are 1000 bacteria after 1 hour and 4000 after 3 hours, how many bacteria were there initially?",
+                },
+                {
+                    problem: "13. Solve the initial value problem $\\frac{dy}{dx} = \\frac{x^2}{y^2}$, $y(1) = 2$.",
+                },
+                {
+                    problem: "14. Verify that $y = \\sin(x) + C\\cos(x)$ is a solution to $\\frac{dy}{dx} + y \\tan(x) = \\cos(x)$.",
+                },
+                {
+                    problem: "15. Find the general solution of the differential equation $\\frac{dy}{dx} = \\frac{y}{x}$.",
+                },
+                {
+                    problem: "16. A cup of coffee at 90°C is placed in a room at 20°C. If the temperature of the coffee is 70°C after 5 minutes, when will it be 40°C? (Newton's Law of Cooling)",
+                },
+                {
+                    problem: "17. Solve the differential equation $\\frac{dy}{dx} = xy^2$.",
+                },
+                {
+                    problem: "18. Find the general solution of $\\frac{dy}{dx} = \\frac{1}{x^2}$.",
+                },
+                {
+                    problem: "19. A savings account earns interest at a rate proportional to the current balance. If an initial deposit of $1000 grows to $1200 in 2 years, how long will it take to reach $2000?",
+                },
+                {
+                    problem: "20. Solve the initial value problem $\\frac{dy}{dx} = \\frac{x}{y+1}$, $y(0) = 0$.",
+                },
+                {
+                    problem: "21. Find the general solution of $\\frac{dy}{dx} = y^2 + 1$.",
+                },
+                {
+                    problem: "22. A tank contains 100 liters of water with 10 kg of salt dissolved in it. Pure water is pumped into the tank at a rate of 5 L/min, and the well-mixed solution is pumped out at the same rate. How much salt remains in the tank after 20 minutes?",
+                },
+                {
+                    problem: "23. Solve the differential equation $\\frac{dy}{dx} = \\frac{x+1}{y}$.",
+                },
+                {
+                    problem: "24. Find the general solution of $\\frac{dy}{dx} = x e^x$.",
+                },
+                {
+                    problem: "25. A certain chemical reaction proceeds at a rate proportional to the concentration of the reactant. If the concentration is initially $C_0$ and is halved in 10 minutes, how long will it take for the concentration to be one-quarter of its initial value?",
+                },
+                {
+                    problem: "26. Solve the initial value problem $\\frac{dy}{dx} = \\frac{\\sin(x)}{\\cos(y)}$, $y(0) = \\frac{\\pi}{2}$.",
+                },
+                {
+                    problem: "27. Find the general solution of $\\frac{dy}{dx} = \\frac{y^2}{x}$.",
+                },
+                {
+                    problem: "28. A radioactive substance has a half-life of 1620 years. If there are 10g initially, how much remains after 500 years?",
+                },
+                {
+                    problem: "29. Solve the differential equation $\\frac{dy}{dx} = \\sqrt{xy}$.",
+                },
+                {
+                    problem: "30. Find the general solution of $\\frac{dy}{dx} = \\frac{x^2+1}{y^2+1}$.",
+                },
+                {
+                    problem: "31. A population of rabbits grows according to the logistic equation $\\frac{dP}{dt} = kP(M-P)$, where $M$ is the carrying capacity. If $M=1000$ and $k=0.001$, and $P(0)=100$, find $P(t)$.",
+                },
+                {
+                    problem: "32. Solve the initial value problem $\\frac{dy}{dx} = y \\ln(x)$, $y(1)=e$.",
+                },
+                {
+                    problem: "33. Find the general solution of $\\frac{dy}{dx} = \\frac{e^x}{y}$.",
+                },
+                {
+                    problem: "34. A mixing problem: A tank initially contains 200 L of pure water. A solution containing 0.5 kg of salt per liter enters at 4 L/min, and the well-mixed solution leaves at 4 L/min. Find the amount of salt in the tank after $t$ minutes.",
+                },
+                {
+                    problem: "35. Solve the differential equation $\\frac{dy}{dx} = (x+y)^2$. (Hint: Let $u=x+y$)",
+                },
+                {
+                    problem: "36. Find the general solution of $\\frac{dy}{dx} = \\frac{x^2}{y}$.",
+                },
+                {
+                    problem: "37. A certain object cools at a rate proportional to the difference between its temperature and the ambient temperature. If a metal bar at 100°C is placed in a 20°C room and cools to 80°C in 10 minutes, how long will it take to cool to 30°C?",
+                },
+                {
+                    problem: "38. Solve the initial value problem $\\frac{dy}{dx} = y \\tan(x)$, $y(0)=1$.",
+                },
+                {
+                    problem: "39. Find the general solution of $\\frac{dy}{dx} = \\frac{1}{x^2+1}$.",
+                },
+                {
+                    problem: "40. A rumor spreads through a population of 1000 people at a rate proportional to the product of the number of people who have heard the rumor and the number of people who have not heard it. If 10 people initially heard the rumor and 100 people heard it after 1 day, how many people will have heard the rumor after 5 days?",
+                },
+                {
+                    problem: "41. Solve the differential equation $\\frac{dy}{dx} = y(1-y)$.",
+                },
+                {
+                    problem: "42. Find the general solution of $\\frac{dy}{dx} = x \\sqrt{1-y^2}$.",
+                },
+                {
+                    problem: "43. A tank contains 500 liters of brine with 50 kg of dissolved salt. Brine containing 0.1 kg of salt per liter enters the tank at 5 L/min, and the well-mixed solution leaves at 5 L/min. Find the concentration of salt in the tank after 30 minutes.",
+                },
+                {
+                    problem: "44. Solve the differential equation $\\frac{dy}{dx} = e^x \\sin(x)$.",
+                },
+                {
+                    problem: "45. Find the general solution of $\\frac{dy}{dx} = \\frac{x^2+y^2}{xy}$. (Hint: Homogeneous equation, let $y=vx$)",
+                }
+            ],
+            "7": [
+                {
+                    problem: "1. Find the area of the region bounded by $y = x^2$ and $y = x+2$.",
+                },
+                {
+                    problem: "2. Find the volume of the solid generated by revolving the region bounded by $y = x^2$, $y=0$, and $x=2$ about the x-axis.",
+                },
+                {
+                    problem: "3. Find the arc length of the curve $y = \\frac{2}{3}x^{3/2}$ from $x=0$ to $x=3$.",
+                },
+                {
+                    problem: "4. Find the volume of the solid generated by revolving the region bounded by $y = x$ and $y = x^2$ about the x-axis.",
+                },
+                {
+                    problem: "5. Find the area of the region bounded by $x = y^2$ and $x = y+2$.",
+                },
+                {
+                    problem: "6. Find the volume of the solid generated by revolving the region bounded by $y = x^2$, $y=0$, and $x=2$ about the y-axis.",
+                },
+                {
+                    problem: "7. Find the surface area of the solid generated by revolving the curve $y = x^3$ from $x=0$ to $x=1$ about the x-axis.",
+                },
+                {
+                    problem: "8. Find the work done in stretching a spring 0.5m from its natural length, if a force of 10N is required to hold the spring stretched 0.1m from its natural length.",
+                },
+                {
+                    problem: "9. Find the centroid of the region bounded by $y = x^2$ and $y = x$.",
+                },
+                {
+                    problem: "10. Find the volume of the solid generated by revolving the region bounded by $y = \\sqrt{x}$, $y=0$, and $x=4$ about the x-axis.",
+                },
+                {
+                    problem: "11. Find the area of the region bounded by $y = \\sin(x)$, $y = \\cos(x)$, $x=0$, and $x=\\frac{\\pi}{2}$.",
+                },
+                {
+                    problem: "12. Find the volume of the solid generated by revolving the region bounded by $y = x^2$ and $y = 4$ about the line $y=4$.",
+                },
+                {
+                    problem: "13. Find the arc length of the curve $y = \\ln(\\cos(x))$ from $x=0$ to $x=\\frac{\\pi}{4}$.",
+                },
+                {
+                    problem: "14. A tank has the shape of an inverted circular cone with radius 5 ft and height 10 ft. It is filled with water to a depth of 8 ft. Find the work required to pump all the water to the top of the tank.",
+                },
+                {
+                    problem: "15. Find the center of mass of a thin plate of constant density $\\rho$ covering the region bounded by $y=x^2$ and $y=x$.",
+                },
+                {
+                    problem: "16. Find the volume of the solid generated by revolving the region bounded by $x = y^2$ and $x = 1$ about the line $x=1$.",
+                },
+                {
+                    problem: "17. Find the area of the region bounded by $y = e^x$, $y = e^{-x}$, and $x=1$.",
+                },
+                {
+                    problem: "18. Find the volume of the solid generated by revolving the region bounded by $y = x-x^2$ and $y=0$ about the x-axis.",
+                },
+                {
+                    problem: "19. Find the arc length of the curve $x = \\frac{y^3}{6} + \\frac{1}{2y}$ from $y=1$ to $y=2$.",
+                },
+                {
+                    problem: "20. Find the work done in pumping water out of a cylindrical tank of radius 2 ft and height 10 ft, if the tank is full and the water is pumped to a height of 5 ft above the top of the tank.",
+                },
+                {
+                    problem: "21. Find the centroid of the region bounded by $y = \\sin(x)$ from $x=0$ to $x=\\pi$.",
+                },
+                {
+                    problem: "22. Find the volume of the solid generated by revolving the region bounded by $y = \\sin(x)$, $y=0$, from $x=0$ to $x=\\pi$ about the x-axis.",
+                },
+                {
+                    problem: "23. Find the area of the region bounded by $y = x^3$ and $y = x$.",
+                },
+                {
+                    problem: "24. Find the volume of the solid generated by revolving the region bounded by $y = x^2$ and $y = 2x$ about the y-axis.",
+                },
+                {
+                    problem: "25. Find the surface area of the solid generated by revolving the curve $y = \\sqrt{4-x^2}$ from $x=0$ to $x=2$ about the x-axis.",
+                },
+                {
+                    problem: "26. Find the work done by a force $F(x) = x^2$ N from $x=0$ to $x=3$ m.",
+                },
+                {
+                    problem: "27. Find the centroid of the region bounded by $y = e^x$, $y=0$, $x=0$, and $x=1$.",
+                },
+                {
+                    problem: "28. Find the volume of the solid generated by revolving the region bounded by $y = \\frac{1}{x}$, $y=0$, $x=1$, and $x=2$ about the x-axis.",
+                },
+                {
+                    problem: "29. Find the area of the region bounded by $y = \\sqrt{x}$ and $y = x^2$.",
+                },
+                {
+                    problem: "30. Find the volume of the solid generated by revolving the region bounded by $y = x^2$ and $y = 2x$ about the x-axis.",
+                },
+                {
+                    problem: "31. Find the arc length of the curve $y = \\frac{x^2}{2} - \\frac{\\ln(x)}{4}$ from $x=1$ to $x=e$.",
+                },
+                {
+                    problem: "32. A spherical tank of radius 5 ft is full of water. Find the work required to pump all the water to a point 2 ft above the tank.",
+                },
+                {
+                    problem: "33. Find the centroid of the region bounded by $y = \\cos(x)$ from $x=-\\frac{\\pi}{2}$ to $x=\\frac{\\pi}{2}$.",
+                },
+                {
+                    problem: "34. Find the volume of the solid generated by revolving the region bounded by $x = y^2$ and $x = 2$ about the y-axis.",
+                },
+                {
+                    problem: "35. Find the area of the region bounded by $y = \\ln(x)$, $y=0$, and $x=e$.",
+                },
+                {
+                    problem: "36. Find the volume of the solid generated by revolving the region bounded by $y = e^{-x}$, $y=0$, $x=0$, and $x=1$ about the x-axis.",
+                },
+                {
+                    problem: "37. Find the arc length of the curve $x = \\cos(t)$, $y = \\sin(t)$ from $t=0$ to $t=\\pi$.",
+                },
+                {
+                    problem: "38. A chain weighing 2 lb/ft is 10 ft long and hangs from a ceiling. Find the work done in pulling the entire chain to the ceiling.",
+                },
+                {
+                    problem: "39. Find the centroid of the region bounded by $y = x^2$ and $y = 4$.",
+                },
+                {
+                    problem: "40. Find the volume of the solid generated by revolving the region bounded by $y = \\frac{1}{x}$, $y=0$, $x=1$, and $x=4$ about the y-axis.",
+                },
+                {
+                    problem: "41. Find the area of the region bounded by $y = x^2 - 4x$ and $y = 0$.",
+                },
+                {
+                    problem: "42. Find the volume of the solid generated by revolving the region bounded by $y = \\frac{1}{x^2}$, $y=0$, $x=1$, and $x=2$ about the x-axis.",
+                },
+                {
+                    problem: "43. Find the arc length of the curve $y = \\frac{e^x + e^{-x}}{2}$ from $x=0$ to $x=1$.",
+                },
+                {
+                    problem: "44. A cylindrical tank of radius 3 ft and height 8 ft is filled with water. Find the fluid force on the bottom of the tank.",
+                },
+                {
+                    problem: "45. Find the center of mass of a thin plate of constant density $\\rho$ covering the region bounded by $y = \\sqrt{x}$, $y=0$, and $x=4$.",
+                }
+            ],
+            "8": [
+                {
+                    problem: "1. Evaluate $\\int x \\sin(x) dx$.",
+                },
+                {
+                    problem: "2. Evaluate $\\int \\sin^3(x) \\cos^2(x) dx$.",
+                },
+                {
+                    problem: "3. Evaluate $\\int \\frac{1}{x^2+2x+2} dx$.",
+                },
+                {
+                    problem: "4. Evaluate $\\int \\frac{x^2}{\\sqrt{9-x^2}} dx$.",
+                },
+                {
+                    problem: "5. Evaluate $\\lim_{x \\to 0} \\frac{\\sin(x) - x}{x^3}$ using L'Hôpital's Rule.",
+                },
+                {
+                    problem: "6. Evaluate $\\int \\frac{1}{x(x-1)} dx$.",
+                },
+                {
+                    problem: "7. Evaluate $\\int \\ln(x) dx$.",
+                },
+                {
+                    problem: "8. Evaluate $\\int \\cos^4(x) dx$.",
+                },
+                {
+                    problem: "9. Evaluate $\\int \\frac{1}{x^2-4} dx$.",
+                },
+                {
+                    problem: "10. Evaluate $\\int \\frac{1}{\\sqrt{x^2+4}} dx$.",
+                },
+                {
+                    problem: "11. Evaluate $\\lim_{x \\to \\infty} x e^{-x}$ using L'Hôpital's Rule.",
+                },
+                {
+                    problem: "12. Evaluate $\\int \\frac{x^2+1}{x(x-1)^2} dx$.",
+                },
+                {
+                    problem: "13. Evaluate $\\int x e^{2x} dx$.",
+                },
+                {
+                    problem: "14. Evaluate $\\int \\tan^3(x) \\sec^2(x) dx$.",
+                },
+                {
+                    problem: "15. Evaluate $\\int \\frac{1}{\\sqrt{x^2-2x+5}} dx$.",
+                },
+                {
+                    problem: "16. Evaluate $\\int \\frac{dx}{x^2\\sqrt{x^2-1}}$.",
+                },
+                {
+                    problem: "17. Evaluate $\\lim_{x \\to 0^+} x^x$.",
+                },
+                {
+                    problem: "18. Evaluate $\\int \\frac{x+1}{x^2+4x+5} dx$.",
+                },
+                {
+                    problem: "19. Evaluate $\\int \\arctan(x) dx$.",
+                },
+                {
+                    problem: "20. Evaluate $\\int \\sin(4x) \\cos(3x) dx$.",
+                },
+                {
+                    problem: "21. Evaluate $\\int \\frac{1}{x^3+x} dx$.",
+                },
+                {
+                    problem: "22. Evaluate $\\int \\frac{x^2}{(x-1)^2(x+1)} dx$.",
+                },
+                {
+                    problem: "23. Evaluate $\\lim_{x \\to 0} (\\frac{1}{\\sin x} - \\frac{1}{x})$.",
+                },
+                {
+                    problem: "24. Evaluate $\\int \\frac{1}{\\sqrt{x^2-9}} dx$.",
+                },
+                {
+                    problem: "25. Evaluate $\\int \\sec^3(x) dx$.",
+                },
+                {
+                    problem: "26. Evaluate $\\int \\frac{1}{x^2+4x+3} dx$.",
+                },
+                {
+                    problem: "27. Evaluate $\\int \\frac{x^2-x+6}{x^3+3x} dx$.",
+                },
+                {
+                    problem: "28. Evaluate $\\lim_{x \\to \\infty} (x - \\ln x)$.",
+                },
+                {
+                    problem: "29. Evaluate $\\int \\frac{1}{x(x^2+1)} dx$.",
+                },
+                {
+                    problem: "30. Evaluate $\\int \\frac{x}{\\sqrt{x^2+2x+2}} dx$.",
+                },
+                {
+                    problem: "31. Evaluate $\\int \\sin(\\ln x) dx$.",
+                },
+                {
+                    problem: "32. Evaluate $\\int \\frac{1}{(x^2+1)^2} dx$.",
+                },
+                {
+                    problem: "33. Evaluate $\\lim_{x \\to 0} (\\frac{1}{x} - \\cot x)$.",
+                },
+                {
+                    problem: "34. Evaluate $\\int \\frac{x^3}{x^2+1} dx$.",
+                },
+                {
+                    problem: "35. Evaluate $\\int \\frac{1}{\\sqrt{e^{2x}-1}} dx$.",
+                },
+                {
+                    problem: "36. Evaluate $\\int \\frac{e^x}{e^{2x}+2e^x+2} dx$.",
+                },
+                {
+                    problem: "37. Evaluate $\\lim_{x \\to 0^+} (\\sin x)^x$.",
+                },
+                {
+                    problem: "38. Evaluate $\\int \\frac{1}{x^3-1} dx$.",
+                },
+                {
+                    problem: "39. Evaluate $\\int \\frac{x^2}{\\sqrt{x^2+4}} dx$.",
+                },
+                {
+                    problem: "40. Evaluate $\\int \\frac{\\cos x}{\\sin^2 x + \\sin x - 2} dx$.",
+                },
+                {
+                    problem: "41. Evaluate $\\lim_{x \\to \\infty} (\\ln x)^{1/x}$.",
+                },
+                {
+                    problem: "42. Evaluate $\\int \\frac{1}{x^2+x+1} dx$.",
+                },
+                {
+                    problem: "43. Evaluate $\\int \\frac{x^2+x+1}{x^3+x} dx$.",
+                },
+                {
+                    problem: "44. Evaluate $\\lim_{x \\to 0} (\\frac{\\tan x}{x})^{1/x^2}$.",
+                },
+                {
+                    problem: "45. Evaluate $\\int \\frac{1}{1+e^x} dx$.",
+                }
+            ],
+            "9": [
+                {
+                    problem: "1. Determine if the sequence $a_n = \\frac{n}{2n+1}$ converges or diverges. If it converges, find its limit.",
+                },
+                {
+                    problem: "2. Determine if the series $\\sum_{n=1}^{\\infty} \\frac{1}{n^2}$ converges or diverges.",
+                },
+                {
+                    problem: "3. Determine if the series $\\sum_{n=1}^{\\infty} \\frac{n}{2n+1}$ converges or diverges.",
+                },
+                {
+                    problem: "4. Find the sum of the geometric series $\\sum_{n=0}^{\\infty} (\\frac{1}{2})^n$.",
+                },
+                {
+                    problem: "5. Determine if the series $\\sum_{n=1}^{\\infty} \\frac{1}{\\sqrt{n}}$ converges or diverges.",
+                },
+                {
+                    problem: "6. Determine if the series $\\sum_{n=1}^{\\infty} \\frac{(-1)^n}{n}$ converges or diverges.",
+                },
+                {
+                    problem: "7. Find the radius and interval of convergence for the power series $\\sum_{n=0}^{\\infty} \\frac{x^n}{n!}$.",
+                },
+                {
+                    problem: "8. Find the Maclaurin series for $f(x) = e^x$.",
+                },
+                {
+                    problem: "9. Determine if the series $\\sum_{n=1}^{\\infty} \\frac{n!}{n^n}$ converges or diverges.",
+                },
+                {
+                    problem: "10. Determine if the series $\\sum_{n=1}^{\\infty} \\frac{\\ln n}{n}$ converges or diverges.",
+                },
+                {
+                    problem: "11. Find the Taylor series for $f(x) = \\sin(x)$ centered at $a=0$.",
+                },
+                {
+                    problem: "12. Determine if the series $\\sum_{n=1}^{\\infty} \\frac{1}{n \\ln n}$ converges or diverges.",
+                },
+                {
+                    problem: "13. Find the radius and interval of convergence for the power series $\\sum_{n=0}^{\\infty} n! x^n$.",
+                },
+                {
+                    problem: "14. Determine if the series $\\sum_{n=1}^{\\infty} \\frac{n^2}{2^n}$ converges or diverges.",
+                },
+                {
+                    problem: "15. Find the sum of the series $\\sum_{n=1}^{\\infty} \\frac{1}{n(n+1)}$.",
+                },
+                {
+                    problem: "16. Determine if the series $\\sum_{n=1}^{\\infty} (\\frac{n}{n+1})^n$ converges or diverges.",
+                },
+                {
+                    problem: "17. Find the Taylor series for $f(x) = \\ln(x)$ centered at $a=1$.",
+                },
+                {
+                    problem: "18. Determine if the series $\\sum_{n=1}^{\\infty} \\frac{\\cos(n)}{n^2}$ converges or diverges.",
+                },
+                {
+                    problem: "19. Find the radius and interval of convergence for the power series $\\sum_{n=1}^{\\infty} \\frac{(x-2)^n}{n}$.",
+                },
+                {
+                    problem: "20. Determine if the series $\\sum_{n=1}^{\\infty} \\frac{1}{n!}$ converges or diverges.",
+                },
+                {
+                    problem: "21. Find the Maclaurin series for $f(x) = \\cos(x)$.",
+                },
+                {
+                    problem: "22. Determine if the series $\\sum_{n=1}^{\\infty} \\frac{1}{n^{1.1}}$ converges or diverges.",
+                },
+                {
+                    problem: "23. Find the sum of the series $\\sum_{n=0}^{\\infty} \\frac{(-1)^n}{n!}$.",
+                },
+                {
+                    problem: "24. Determine if the series $\\sum_{n=1}^{\\infty} \\frac{2^n}{n!}$ converges or diverges.",
+                },
+                {
+                    problem: "25. Find the radius and interval of convergence for the power series $\\sum_{n=0}^{\\infty} \\frac{x^n}{n+1}$.",
+                },
+                {
+                    problem: "26. Determine if the series $\\sum_{n=1}^{\\infty} \\frac{\\sqrt{n}}{n^2+1}$ converges or diverges.",
+                },
+                {
+                    problem: "27. Find the Taylor series for $f(x) = \\frac{1}{x}$ centered at $a=1$.",
+                },
+                {
+                    problem: "28. Determine if the series $\\sum_{n=1}^{\\infty} (\\frac{n^2+1}{2n^2+n})^n$ converges or diverges.",
+                },
+                {
+                    problem: "29. Find the sum of the series $\\sum_{n=0}^{\\infty} (\\frac{2}{3})^n$.",
+                },
+                {
+                    problem: "30. Determine if the series $\\sum_{n=1}^{\\infty} \\frac{n!}{10^n}$ converges or diverges.",
+                },
+                {
+                    problem: "31. Find the Maclaurin series for $f(x) = \\frac{1}{1-x}$.",
+                },
+                {
+                    problem: "32. Determine if the series $\\sum_{n=1}^{\\infty} \\frac{n}{e^n}$ converges or diverges.",
+                },
+                {
+                    problem: "33. Find the radius and interval of convergence for the power series $\\sum_{n=0}^{\\infty} \\frac{(x+1)^n}{2^n}$.",
+                },
+                {
+                    problem: "34. Determine if the series $\\sum_{n=1}^{\\infty} \\frac{(-1)^n}{\\sqrt{n}}$ converges or diverges.",
+                },
+                {
+                    problem: "35. Find the sum of the series $\\sum_{n=2}^{\\infty} \\frac{1}{n^2-1}$.",
+                },
+                {
+                    problem: "36. Determine if the series $\\sum_{n=1}^{\\infty} \\frac{\\arctan(n)}{n^2+1}$ converges or diverges.",
+                },
+                {
+                    problem: "37. Find the Taylor series for $f(x) = e^x$ centered at $a=1$.",
+                },
+                {
+                    problem: "38. Determine if the series $\\sum_{n=1}^{\\infty} \\frac{n^3}{n!}$ converges or diverges.",
+                },
+                {
+                    problem: "39. Find the radius and interval of convergence for the power series $\\sum_{n=1}^{\\infty} \\frac{x^n}{n \\cdot 3^n}$.",
+                },
+                {
+                    problem: "40. Determine if the series $\\sum_{n=1}^{\\infty} \\frac{1}{n^p}$ converges or diverges for various $p$ values.",
+                },
+                {
+                    problem: "41. Find the Maclaurin series for $f(x) = \\sinh(x)$.",
+                },
+                {
+                    problem: "42. Determine if the series $\\sum_{n=1}^{\\infty} \\frac{n!}{e^n}$ converges or diverges.",
+                },
+                {
+                    problem: "43. Find the sum of the series $\\sum_{n=0}^{\\infty} \\frac{1}{n!}$.",
+                },
+                {
+                    problem: "44. Determine if the series $\\sum_{n=1}^{\\infty} \\frac{\\sin(n)}{n^3}$ converges or diverges.",
+                },
+                {
+                    problem: "45. Find the Taylor series for $f(x) = \\cos(x)$ centered at $a=\\frac{\\pi}{2}$.",
+                }
+            ],
+            "10": [
+                {
+                    problem: "1. Identify the conic section represented by $x^2 + 4y^2 = 4$. Sketch its graph.",
+                },
+                {
+                    problem: "2. Find the equation of the parabola with focus $(0, 2)$ and directrix $y = -2$.",
+                },
+                {
+                    problem: "3. Eliminate the parameter to find the Cartesian equation for $x = t+1$, $y = t^2$.",
+                },
+                {
+                    problem: "4. Convert the polar coordinates $(2, \\frac{\\pi}{3})$ to rectangular coordinates.",
+                },
+                {
+                    problem: "5. Convert the rectangular coordinates $(1, -1)$ to polar coordinates.",
+                },
+                {
+                    problem: "6. Find the equation of the ellipse with foci $(\\pm 3, 0)$ and major axis length 10.",
+                },
+                {
+                    problem: "7. Find the equation of the hyperbola with foci $(\\pm 5, 0)$ and vertices $(\\pm 3, 0)$.",
+                },
+                {
+                    problem: "8. Find $\\frac{dy}{dx}$ for the parametric equations $x = t^3 - 3t$, $y = t^2 - 5$.",
+                },
+                {
+                    problem: "9. Find the area of the region enclosed by the polar curve $r = 2\\sin(\\theta)$.",
+                },
+                {
+                    problem: "10. Sketch the graph of the polar equation $r = 1 + \\cos(\\theta)$.",
+                },
+                {
+                    problem: "11. Identify the conic section represented by $y^2 - 2x + 4y + 6 = 0$.",
+                },
+                {
+                    problem: "12. Find the equation of the parabola with vertex $(1, -2)$ and focus $(1, 0)$.",
+                },
+                {
+                    problem: "13. Eliminate the parameter to find the Cartesian equation for $x = 4\\cos(\\theta)$, $y = 3\\sin(\\theta)$.",
+                },
+                {
+                    problem: "14. Convert the polar equation $r = 4\\cos(\\theta)$ to a rectangular equation.",
+                },
+                {
+                    problem: "15. Convert the rectangular equation $x^2 + y^2 = 9$ to a polar equation.",
+                },
+                {
+                    problem: "16. Find the equation of the ellipse with vertices $(0, \\pm 5)$ and minor axis length 6.",
+                },
+                {
+                    problem: "17. Find the equation of the hyperbola with vertices $(0, \\pm 2)$ and asymptotes $y = \\pm 2x$.",
+                },
+                {
+                    problem: "18. Find the arc length of the parametric curve $x = \\cos(t)$, $y = \\sin(t)$ from $t=0$ to $t=\\pi$.",
+                },
+                {
+                    problem: "19. Find the area of the region enclosed by the polar curve $r = 3\\cos(2\\theta)$.",
+                },
+                {
+                    problem: "20. Sketch the graph of the polar equation $r = 2\\theta$ (Archimedean spiral).",
+                },
+                {
+                    problem: "21. Classify the conic section given by $4x^2 - 9y^2 - 16x - 18y - 29 = 0$.",
+                },
+                {
+                    problem: "22. Find the equation of the parabola with vertex $(0, 0)$ and directrix $x = 3$.",
+                },
+                {
+                    problem: "23. Eliminate the parameter to find the Cartesian equation for $x = \\sqrt{t}$, $y = t-1$.",
+                },
+                {
+                    problem: "24. Convert the polar coordinates $(-1, \\frac{3\\pi}{4})$ to rectangular coordinates.",
+                },
+                {
+                    problem: "25. Convert the rectangular coordinates $(-\\sqrt{3}, 1)$ to polar coordinates.",
+                },
+                {
+                    problem: "26. Find the equation of the ellipse with center $(2, 1)$, major axis parallel to the x-axis with length 8, and minor axis length 4.",
+                },
+                {
+                    problem: "27. Find the equation of the hyperbola with center $(0, 0)$, vertex $(4, 0)$, and focus $(5, 0)$.",
+                },
+                {
+                    problem: "28. Find $\\frac{d^2y}{dx^2}$ for the parametric equations $x = t^2$, $y = t^3$.",
+                },
+                {
+                    problem: "29. Find the length of the polar curve $r = e^{\\theta}$ from $\\theta=0$ to $\\theta=\\pi$.",
+                },
+                {
+                    problem: "30. Sketch the graph of the polar equation $r = 2\\cos(3\\theta)$.",
+                },
+                {
+                    problem: "31. Identify the conic section represented by $x^2 + y^2 - 6x + 4y + 4 = 0$.",
+                },
+                {
+                    problem: "32. Find the equation of the parabola with focus $(3, 4)$ and directrix $x = 1$.",
+                },
+                {
+                    problem: "33. Eliminate the parameter to find the Cartesian equation for $x = \\sec(t)$, $y = \\tan(t)$.",
+                },
+                {
+                    problem: "34. Convert the polar equation $r = \\frac{2}{1-\\cos(\\theta)}$ to a rectangular equation.",
+                },
+                {
+                    problem: "35. Convert the rectangular equation $y = x$ to a polar equation.",
+                },
+                {
+                    problem: "36. Find the equation of the ellipse with foci $(0, \\pm 4)$ and major axis length 10.",
+                },
+                {
+                    problem: "37. Find the equation of the hyperbola with vertices $(\\pm 1, 0)$ and asymptotes $y = \\pm 3x$.",
+                },
+                {
+                    problem: "38. Find the area of the surface generated by revolving the parametric curve $x = t^3$, $y = t^2$ ($0 \\le t \\le 1$) about the x-axis.",
+                },
+                {
+                    problem: "39. Find the area of the region common to $r = 3\\cos(\\theta)$ and $r = 1 + \\cos(\\theta)$.",
+                },
+                {
+                    problem: "40. Sketch the graph of the polar equation $r = \\sin(2\\theta)$.",
+                },
+                {
+                    problem: "41. Classify the conic section given by $x^2 + 2y^2 - 4x + 4y - 2 = 0$.",
+                },
+                {
+                    problem: "42. Find the equation of the parabola with vertex $(0, 0)$ and focus $(-2, 0)$.",
+                },
+                {
+                    problem: "43. Eliminate the parameter to find the Cartesian equation for $x = e^t$, $y = e^{2t}$.",
+                },
+                {
+                    problem: "44. Convert the polar equation $r = \\frac{3}{2+\\sin(\\theta)}$ to a rectangular equation.",
+                },
+                {
+                    problem: "45. Convert the rectangular equation $x^2 + y^2 - 4x = 0$ to a polar equation.",
+                }
+            ],
+            "11": [
+                {
+                    problem: "1. Find the dot product of vectors $\\mathbf{u} = \\langle 1, -2, 3 \\rangle$ and $\\mathbf{v} = \\langle 4, 0, -1 \\rangle$.",
+                },
+                {
+                    problem: "2. Find the cross product of vectors $\\mathbf{u} = \\langle 1, 2, 0 \\rangle$ and $\\mathbf{v} = \\langle 3, -1, 4 \\rangle$.",
+                },
+                {
+                    problem: "3. Find the equation of the plane passing through the point $(1, 2, -3)$ and perpendicular to the vector $\\mathbf{n} = \\langle 2, -1, 4 \\rangle$.",
+                },
+                {
+                    problem: "4. Find the distance between the points $(1, 2, 3)$ and $(4, -1, 5)$.",
+                },
+                {
+                    problem: "5. Find the angle between the vectors $\\mathbf{u} = \\langle 1, 1, 0 \\rangle$ and $\\mathbf{v} = \\langle 0, 1, 1 \\rangle$.",
+                },
+                {
+                    problem: "6. Find the parametric equations of the line passing through points $(1, 2, 3)$ and $(4, 5, 6)$.",
+                },
+                {
+                    problem: "7. Convert the point $(1, \\frac{\\pi}{2}, 3)$ from cylindrical to rectangular coordinates.",
+                },
+                {
+                    problem: "8. Convert the point $(2, \\frac{\\pi}{4}, \\frac{\\pi}{3})$ from spherical to rectangular coordinates.",
+                },
+                {
+                    problem: "9. Find the projection of $\\mathbf{u} = \\langle 3, 1, 2 \\rangle$ onto $\\mathbf{v} = \\langle 1, -1, 0 \\rangle$.",
+                },
+                {
+                    problem: "10. Find the area of the parallelogram with adjacent sides $\\mathbf{u} = \\langle 1, 0, 2 \\rangle$ and $\\mathbf{v} = \\langle 0, 3, 1 \\rangle$.",
+                },
+                {
+                    problem: "11. Find the volume of the parallelepiped determined by vectors $\\mathbf{u} = \\langle 1, 1, 0 \\rangle$, $\\mathbf{v} = \\langle 0, 1, 1 \\rangle$, and $\\mathbf{w} = \\langle 1, 0, 1 \\rangle$.",
+                },
+                {
+                    problem: "12. Find the equation of the sphere with center $(1, -2, 3)$ and radius 4.",
+                },
+                {
+                    problem: "13. Find the derivative of the vector-valued function $\\mathbf{r}(t) = \\langle t^2, \\sin(t), e^t \\rangle$.",
+                },
+                {
+                    problem: "14. Find the unit tangent vector $\\mathbf{T}(t)$ for $\\mathbf{r}(t) = \\langle \\cos(t), \\sin(t), t \\rangle$.",
+                },
+                {
+                    problem: "15. Find the length of the curve $\\mathbf{r}(t) = \\langle 3t, 4t, 5t \\rangle$ from $t=0$ to $t=1$.",
+                },
+                {
+                    problem: "16. Find the equation of the plane containing the points $(1, 0, 0)$, $(0, 1, 0)$, and $(0, 0, 1)$.",
+                },
+                {
+                    problem: "17. Convert the rectangular point $(1, 1, 1)$ to cylindrical coordinates.",
+                },
+                {
+                    problem: "18. Convert the rectangular point $(1, 1, 1)$ to spherical coordinates.",
+                },
+                {
+                    problem: "19. Find the work done by the force $\\mathbf{F} = \\langle 2, 3, -1 \\rangle$ moving an object from $P(1, 1, 1)$ to $Q(3, 2, 0)$.",
+                },
+                {
+                    problem: "20. Determine if the vectors $\\mathbf{u} = \\langle 1, -1, 2 \\rangle$ and $\\mathbf{v} = \\langle 2, 0, 1 \\rangle$ are orthogonal.",
+                },
+                {
+                    problem: "21. Find the equation of the line of intersection of the planes $x+y+z=1$ and $x-y+2z=0$.",
+                },
+                {
+                    problem: "22. Find the distance from the point $(1, 1, 1)$ to the plane $x+2y-2z=5$.",
+                },
+                {
+                    problem: "23. Find the integral of the vector-valued function $\\mathbf{r}(t) = \\langle t, t^2, t^3 \\rangle$.",
+                },
+                {
+                    problem: "24. Find the velocity and acceleration vectors for $\\mathbf{r}(t) = \\langle e^t, e^{-t}, t \\rangle$.",
+                },
+                {
+                    problem: "25. Find the curvature of the curve $\\mathbf{r}(t) = \\langle t, t^2, 0 \\rangle$.",
+                },
+                {
+                    problem: "26. Find the equation of the plane that contains the line $x=1+2t, y=2-t, z=3t$ and is parallel to the plane $x+y-z=5$.",
+                },
+                {
+                    problem: "27. Find the area of the triangle with vertices $P(1, 0, 0)$, $Q(0, 1, 0)$, and $R(0, 0, 1)$.",
+                },
+                {
+                    problem: "28. Find the equation of the cylinder $x^2+y^2=4$ in cylindrical coordinates.",
+                },
+                {
+                    problem: "29. Find the equation of the sphere $x^2+y^2+z^2=9$ in spherical coordinates.",
+                },
+                {
+                    problem: "30. Find the scalar projection of $\\mathbf{u} = \\langle 2, -1, 3 \\rangle$ onto $\\mathbf{v} = \\langle 1, 2, 1 \\rangle$.",
+                },
+                {
+                    problem: "31. Find the equation of the plane parallel to $2x+3y-z=1$ and passing through $(1, 0, 0)$.",
+                },
+                {
+                    problem: "32. Find the intersection point of the line $x=t, y=t, z=t$ and the plane $x+y+z=6$.",
+                },
+                {
+                    problem: "33. Find the tangent line to the curve $\\mathbf{r}(t) = \\langle t, t^2, t^3 \\rangle$ at $t=1$.",
+                },
+                {
+                    problem: "34. Find the length of the curve $\\mathbf{r}(t) = \\langle e^t \\cos t, e^t \\sin t, e^t \\rangle$ from $t=0$ to $t=1$.",
+                },
+                {
+                    problem: "35. Find the equation of the plane passing through $(1, 2, 3)$ and containing the line $x=1+t, y=2-t, z=3+2t$.",
+                },
+                {
+                    problem: "36. Find the distance between the skew lines $L_1: x=1+t, y=2+t, z=3+t$ and $L_2: x=4+s, y=1+s, z=5+s$.",
+                },
+                {
+                    problem: "37. Convert the cylindrical equation $r=3$ to rectangular coordinates.",
+                },
+                {
+                    problem: "38. Convert the spherical equation $\\phi = \\frac{\\pi}{4}$ to rectangular coordinates.",
+                },
+                {
+                    problem: "39. Find the component of $\\mathbf{u} = \\langle 1, 2, 3 \\rangle$ orthogonal to $\\mathbf{v} = \\langle 1, 1, 1 \\rangle$.",
+                },
+                {
+                    problem: "40. Find the equation of the plane passing through $(1, 0, 0)$, $(0, 1, 0)$, and $(1, 1, 1)$.",
+                },
+                {
+                    problem: "41. Find the intersection of the sphere $x^2+y^2+z^2=4$ and the plane $z=1$.",
+                },
+                {
+                    problem: "42. Find the velocity and position of a particle if $\\mathbf{a}(t) = \\langle 0, 0, -9.8 \\rangle$, $\\mathbf{v}(0) = \\langle 1, 0, 10 \\rangle$, and $\\mathbf{r}(0) = \\langle 0, 0, 0 \\rangle$.",
+                },
+                {
+                    problem: "43. Find the unit normal vector $\\mathbf{N}(t)$ for $\\mathbf{r}(t) = \\langle \\cos(t), \\sin(t), t \\rangle$.",
+                },
+                {
+                    problem: "44. Find the equation of the plane that contains the points $A(1, 2, 3)$, $B(2, 3, 1)$, and $C(3, 1, 2)$.",
+                },
+                {
+                    problem: "45. Find the distance from the point $(0, 0, 0)$ to the line $x=1+t, y=2+t, z=3+t$.",
+                }
+            ],
+            "12": [
+                {
+                    problem: "1. Find the first partial derivatives of $f(x, y) = x^3 y^2 + 2x y^4$.",
+                },
+                {
+                    problem: "2. Find the gradient of $f(x, y, z) = x^2 y + y^2 z - 3xz$.",
+                },
+                {
+                    problem: "3. Find the directional derivative of $f(x, y) = x^2 y^3$ at $(1, 2)$ in the direction of $\\mathbf{v} = \\langle 3, 4 \\rangle$.",
+                },
+                {
+                    problem: "4. Find the local extrema of $f(x, y) = x^2 + y^2 - 2x - 6y + 14$.",
+                },
+                {
+                    problem: "5. Use Lagrange multipliers to find the maximum value of $f(x, y) = xy$ subject to $x^2 + y^2 = 1$.",
+                },
+                {
+                    problem: "6. Find the equation of the tangent plane to $z = x^2 + y^2$ at the point $(1, 1, 2)$.",
+                },
+                {
+                    problem: "7. Find the second partial derivatives of $f(x, y) = e^{xy}$.",
+                },
+                {
+                    problem: "8. If $z = x^2 + y^2$ and $x = r \\cos(\\theta)$, $y = r \\sin(\\theta)$, find $\\frac{\\partial z}{\\partial r}$ and $\\frac{\\partial z}{\\partial \\theta}$ using the Chain Rule.",
+                },
+                {
+                    problem: "9. Find the critical points of $f(x, y) = x^3 + y^3 - 3xy$.",
+                },
+                {
+                    problem: "10. Find the absolute maximum and minimum values of $f(x, y) = x^2 - y^2$ on the disk $x^2 + y^2 \\le 1$.",
+                },
+                {
+                    problem: "11. Find the directional derivative of $f(x, y, z) = xyz$ at $(1, 2, 3)$ in the direction of $\\mathbf{v} = \\langle 1, 1, 1 \\rangle$.",
+                },
+                {
+                    problem: "12. Find the equation of the normal line to $z = x^2 + y^2$ at the point $(1, 1, 2)$.",
+                },
+                {
+                    problem: "13. Determine if the limit exists: $\\lim_{(x, y) \\to (0, 0)} \\frac{xy}{x^2+y^2}$.",
+                },
+                {
+                    problem: "14. Find the domain and range of $f(x, y) = \\sqrt{9 - x^2 - y^2}$.",
+                },
+                {
+                    problem: "15. Find the linear approximation of $f(x, y) = e^{xy}$ at $(0, 0)$.",
+                },
+                {
+                    problem: "16. Find the maximum rate of change of $f(x, y) = x^2 y^3$ at $(1, 2)$.",
+                },
+                {
+                    problem: "17. Find the tangent plane to $x^2 + y^2 + z^2 = 9$ at $(2, 2, 1)$.",
+                },
+                {
+                    problem: "18. Find the critical points of $f(x, y) = 4 + 2x^2 + 3y^2$.",
+                },
+                {
+                    problem: "19. Use Lagrange multipliers to find the dimensions of a rectangular box with largest volume if it is inscribed in a sphere of radius $R$.",
+                },
+                {
+                    problem: "20. Determine if the function $f(x, y) = \\frac{x^2 y}{x^4+y^2}$ is continuous at $(0, 0)$.",
+                },
+                {
+                    problem: "21. Find the first partial derivatives of $f(x, y, z) = \\ln(x^2+y^2+z^2)$.",
+                },
+                {
+                    problem: "22. Find the gradient of $f(x, y) = \\arctan(\\frac{y}{x})$.",
+                },
+                {
+                    problem: "23. Find the directional derivative of $f(x, y) = \\sqrt{x^2+y^2}$ at $(3, 4)$ in the direction of $\\mathbf{v} = \\langle 1, -1 \\rangle$.",
+                },
+                {
+                    problem: "24. Classify the critical points of $f(x, y) = x^4 + y^4 - 4xy + 1$.",
+                },
+                {
+                    problem: "25. Use Lagrange multipliers to find the points on the sphere $x^2+y^2+z^2=1$ closest to and farthest from the point $(1, 2, 3)$.",
+                },
+                {
+                    problem: "26. Find the equation of the tangent plane to $z = xy$ at $(1, 1, 1)$.",
+                },
+                {
+                    problem: "27. If $w = x^2 y - y^2 z$ where $x = \\cos t$, $y = \\sin t$, $z = t$, find $\\frac{dw}{dt}$.",
+                },
+                {
+                    problem: "28. Find the critical points of $f(x, y) = x e^{-x^2-y^2}$.",
+                },
+                {
+                    problem: "29. Find the absolute maximum and minimum values of $f(x, y) = xy$ on the square region $0 \\le x \\le 1, 0 \\le y \\le 1$.",
+                },
+                {
+                    problem: "30. Find the Cobb-Douglas production function $P(L, K) = bL^{\\alpha}K^{1-\\alpha}$ if $P(1,1)=100$, and the marginal productivities are $P_L(1,1)=50$, $P_K(1,1)=50$.",
+                },
+                {
+                    problem: "31. Find the local extrema of $f(x, y) = \\sin(x) \\cos(y)$.",
+                },
+                {
+                    problem: "32. Find the equation of the tangent plane to $z = \\sqrt{x^2+y^2}$ at $(3, 4, 5)$.",
+                },
+                {
+                    problem: "33. If $f(x, y) = x^2 - xy + y^2 - x$, find the directional derivative at $(1, -1)$ in the direction toward the origin.",
+                },
+                {
+                    problem: "34. Find the values of $a, b, c$ such that $f(x, y) = ax^2 + by^2 + cxy$ has a local minimum at $(1, 2)$ with $f(1, 2) = -5$.",
+                },
+                {
+                    problem: "35. Find the maximum value of $f(x, y, z) = x y z$ subject to $x+y+z=1$ (for $x,y,z > 0$).",
+                },
+                {
+                    problem: "36. Find the equation of the tangent plane to $z = \\frac{xy}{x^2+y^2}$ at $(1, 1, 1/2)$.",
+                },
+                {
+                    problem: "37. Determine if $f(x,y) = \\frac{x^2-y^2}{x^2+y^2}$ has a limit as $(x,y) \\to (0,0)$.",
+                },
+                {
+                    problem: "38. Find the domain of $f(x, y, z) = \\ln(x^2+y^2+z^2-1)$.",
+                },
+                {
+                    problem: "39. Find the linear approximation of $f(x, y, z) = \\sqrt{x^2+y^2+z^2}$ at $(3, 2, 6)$.",
+                },
+                {
+                    problem: "40. Find the critical points of $f(x, y) = x^2 + y^2 + xy + 3x - 3y + 4$.",
+                },
+                {
+                    problem: "41. Find the dimensions of a rectangular box with largest volume that can be inscribed in the ellipsoid $\\frac{x^2}{a^2} + \\frac{y^2}{b^2} + \\frac{z^2}{c^2} = 1$.",
+                },
+                {
+                    problem: "42. Find the local extrema of $f(x, y) = x^2 + 4y^2 - 4xy + 2$.",
+                },
+                {
+                    problem: "43. Find the maximum rate of change of $f(x, y, z) = \\ln(x^2+y^2+z^2)$ at $(1, 2, 3)$.",
+                },
+                {
+                    problem: "44. Find the equation of the tangent plane to $xyz = 6$ at $(1, 2, 3)$.",
+                },
+                {
+                    problem: "45. If $u = x^2 y^3$ and $x = r \\cos(\\theta)$, $y = r \\sin(\\theta)$, find $\\frac{\\partial u}{\\partial r}$ and $\\frac{\\partial u}{\\partial \\theta}$.",
+                }
+            ],
+            "13": [
+                {
+                    problem: "1. Evaluate the iterated integral $\\int_{0}^{1} \\int_{0}^{x} (x+y) dy dx$.",
+                },
+                {
+                    problem: "2. Find the volume of the solid under the surface $z = x^2 y$ and above the rectangle $[0, 1] \\times [0, 2]$.",
+                },
+                {
+                    problem: "3. Evaluate $\\int_{0}^{1} \\int_{y}^{1} e^{x^2} dx dy$ by changing the order of integration.",
+                },
+                {
+                    problem: "4. Evaluate $\\iint_R (x^2+y^2) dA$ where $R$ is the disk $x^2+y^2 \\le 4$.",
+                },
+                {
+                    problem: "5. Find the mass of a lamina with density $\\rho(x, y) = xy$ bounded by $y=x^2$ and $y=x$.",
+                },
+                {
+                    problem: "6. Evaluate the iterated integral $\\int_{0}^{2} \\int_{0}^{\\sqrt{4-x^2}} (x^2+y^2) dy dx$ by converting to polar coordinates.",
+                },
+                {
+                    problem: "7. Find the volume of the solid bounded by the planes $z=0$, $x=0$, $y=0$, and $x+y+z=1$.",
+                },
+                {
+                    problem: "8. Evaluate $\\int_{0}^{1} \\int_{0}^{x} \\int_{0}^{y} xyz dz dy dx$.",
+                },
+                {
+                    problem: "9. Find the center of mass of the solid of constant density $\\rho$ bounded by $x^2+y^2+z^2=1$ in the first octant.",
+                },
+                {
+                    problem: "10. Evaluate $\\iint_R \\sin(x^2+y^2) dA$ where $R$ is the region between $x^2+y^2=1$ and $x^2+y^2=4$.",
+                },
+                {
+                    problem: "11. Evaluate $\\int_{0}^{1} \\int_{x^2}^{x} xy dy dx$.",
+                },
+                {
+                    problem: "12. Find the area of the region bounded by $y=x^2$ and $y=x$.",
+                },
+                {
+                    problem: "13. Evaluate $\\int_{0}^{\\pi/2} \\int_{0}^{\\cos(\\theta)} r \\sin(\\theta) dr d\\theta$.",
+                },
+                {
+                    problem: "14. Find the volume of the solid under the surface $z = x^2$ and above the triangle with vertices $(0,0), (2,0), (0,1)$.",
+                },
+                {
+                    problem: "15. Evaluate $\\int_{0}^{1} \\int_{0}^{\\sqrt{1-y^2}} \\frac{1}{1+x^2+y^2} dx dy$ by converting to polar coordinates.",
+                },
+                {
+                    problem: "16. Find the moments of inertia $I_x, I_y$ for a lamina with density $\\rho(x, y) = 1$ bounded by $y=\\sin(x)$ and $y=0$ for $0 \\le x \\le \\pi$.",
+                },
+                {
+                    problem: "17. Evaluate $\\iiint_E x dV$ where $E$ is the region bounded by $z=x^2+y^2$ and $z=4$.",
+                },
+                {
+                    problem: "18. Evaluate $\\int_{0}^{1} \\int_{0}^{z} \\int_{0}^{y} (x+y+z) dx dy dz$.",
+                },
+                {
+                    problem: "19. Find the volume of the solid enclosed by the cylinder $x^2+y^2=1$ and the planes $z=0$ and $z=x+2$.",
+                },
+                {
+                    problem: "20. Evaluate $\\iint_R e^{-(x^2+y^2)} dA$ where $R$ is the entire plane.",
+                },
+                {
+                    problem: "21. Evaluate $\\int_{0}^{1} \\int_{x}^{1} \\sin(y^2) dy dx$ by changing the order of integration.",
+                },
+                {
+                    problem: "22. Find the area of the surface $z = \\sqrt{x^2+y^2}$ above the disk $x^2+y^2 \\le 1$.",
+                },
+                {
+                    problem: "23. Evaluate $\\int_{0}^{2\\pi} \\int_{0}^{1} \\int_{r}^{1} r dz dr d\\theta$ in cylindrical coordinates.",
+                },
+                {
+                    problem: "24. Find the volume of the solid bounded by the paraboloids $z = x^2+y^2$ and $z = 8 - x^2-y^2$.",
+                },
+                {
+                    problem: "25. Evaluate $\\iiint_E xy dV$ where $E$ is the solid tetrahedron with vertices $(0,0,0), (1,0,0), (0,1,0), (0,0,1)$.",
+                },
+                {
+                    problem: "26. Evaluate $\\int_{0}^{1} \\int_{0}^{x} \\frac{y}{x} dy dx$.",
+                },
+                {
+                    problem: "27. Find the average value of $f(x, y) = x^2+y^2$ over the disk $x^2+y^2 \\le R^2$.",
+                },
+                {
+                    problem: "28. Evaluate $\\iint_R (x^2+y^2) dA$ where $R$ is the region between $x=0, y=x, y=1$.",
+                },
+                {
+                    problem: "29. Find the volume of the solid cut from the sphere $x^2+y^2+z^2=4$ by the cylinder $x^2+y^2=1$.",
+                },
+                {
+                    problem: "30. Evaluate $\\int_{0}^{\\pi/2} \\int_{0}^{\\sin(\\theta)} r dr d\\theta$.",
+                },
+                {
+                    problem: "31. Find the moments of inertia $I_x, I_y$ for a rectangular lamina with vertices $(0,0), (a,0), (a,b), (0,b)$ and constant density $\\rho$.",
+                },
+                {
+                    problem: "32. Evaluate $\\iiint_E z dV$ where $E$ is the region bounded by the sphere $x^2+y^2+z^2=R^2$ in the first octant.",
+                },
+                {
+                    problem: "33. Find the volume of the solid bounded by $z=0$ and $z=4-x^2-y^2$.",
+                },
+                {
+                    problem: "34. Evaluate $\\int_{0}^{1} \\int_{0}^{y} \\int_{0}^{x} xy dz dx dy$.",
+                },
+                {
+                    problem: "35. Find the center of mass of a solid cone of constant density $\\rho$ with radius $R$ and height $H$.",
+                },
+                {
+                    problem: "36. Evaluate $\\iint_R y dA$ where $R$ is the region bounded by $y=x^2$ and $y=1$.",
+                },
+                {
+                    problem: "37. Evaluate $\\int_{0}^{2} \\int_{y/2}^{1} \\cos(x^2) dx dy$ by changing the order of integration.",
+                },
+                {
+                    problem: "38. Find the volume of the solid enclosed by the paraboloid $z=x^2+y^2$ and the plane $z=1$.",
+                },
+                {
+                    problem: "39. Evaluate $\\int_{0}^{2\\pi} \\int_{0}^{\\pi/4} \\int_{0}^{1} \\rho^2 \\sin\\phi d\\rho d\\phi d\\theta$ in spherical coordinates.",
+                },
+                {
+                    problem: "40. Find the area of the region bounded by $x=y^2$ and $x=2-y^2$.",
+                },
+                {
+                    problem: "41. Evaluate $\\iint_R (x-y) dA$ where $R$ is the region bounded by $y=x^2$ and $y=x$.",
+                },
+                {
+                    problem: "42. Find the volume of the solid bounded by the cylinder $x^2+y^2=1$, and the planes $z=0$ and $z=y+1$.",
+                },
+                {
+                    problem: "43. Evaluate $\\int_{0}^{2} \\int_{0}^{x} \\int_{0}^{x-y} dz dy dx$.",
+                },
+                {
+                    problem: "44. Find the surface area of the part of the paraboloid $z=x^2+y^2$ that lies below the plane $z=9$.",
+                },
+                {
+                    problem: "45. Find the center of mass of a lamina with density $\\rho(x,y) = x$ bounded by $y=x^2$ and $y=x$.",
+                }
+            ],
+            "14": [
+                {
+                    problem: "1. Evaluate the line integral $\\int_C x^2 y ds$ where $C$ is the line segment from $(0,0)$ to $(1,1)$.",
+                },
+                {
+                    problem: "2. Determine if the vector field $\\mathbf{F}(x, y) = \\langle 2xy, x^2 \\rangle$ is conservative. If so, find a potential function.",
+                },
+                {
+                    problem: "3. Evaluate the line integral $\\int_C \\mathbf{F} \\cdot d\\mathbf{r}$ where $\\mathbf{F}(x, y) = \\langle -y, x \\rangle$ and $C$ is the circle $x^2+y^2=1$ oriented counterclockwise.",
+                },
+                {
+                    problem: "4. Apply Green's Theorem to evaluate $\\oint_C (x-y) dx + (x+y) dy$ where $C$ is the circle $x^2+y^2=1$ oriented counterclockwise.",
+                },
+                {
+                    problem: "5. Find the divergence and curl of the vector field $\\mathbf{F}(x, y, z) = \\langle xy, yz, xz \\rangle$.",
+                },
+                {
+                    problem: "6. Evaluate the surface integral $\\iint_S z dS$ where $S$ is the part of the plane $x+y+z=1$ in the first octant.",
+                },
+                {
+                    problem: "7. Evaluate the line integral $\\int_C y dx - x dy$ where $C$ is the parabola $y=x^2$ from $(0,0)$ to $(1,1)$.",
+                },
+                {
+                    problem: "8. Verify the Divergence Theorem for $\\mathbf{F}(x, y, z) = \\langle x, y, z \\rangle$ over the unit cube $[0,1]^3$.",
+                },
+                {
+                    problem: "9. Verify Stokes' Theorem for $\\mathbf{F}(x, y, z) = \\langle -y, x, 0 \\rangle$ over the upper hemisphere of $x^2+y^2+z^2=1$.",
+                },
+                {
+                    problem: "10. Find the work done by the force field $\\mathbf{F}(x, y) = \\langle x^2, xy \\rangle$ on a particle moving along the line segment from $(0,0)$ to $(1,2)$.",
+                },
+                {
+                    problem: "11. Determine if the vector field $\\mathbf{F}(x, y, z) = \\langle yz, xz, xy \\rangle$ is conservative. If so, find a potential function.",
+                },
+                {
+                    problem: "12. Evaluate the line integral $\\int_C (x+y) ds$ where $C$ is the arc of the circle $x^2+y^2=4$ in the first quadrant.",
+                },
+                {
+                    problem: "13. Find the flux of the vector field $\\mathbf{F}(x, y) = \\langle x, y \\rangle$ across the circle $x^2+y^2=1$ (outward normal).",
+                },
+                {
+                    problem: "14. Use Green's Theorem to find the area of the region bounded by the ellipse $\\frac{x^2}{a^2} + \\frac{y^2}{b^2} = 1$.",
+                },
+                {
+                    problem: "15. Find the curl and divergence of $\\mathbf{F}(x, y, z) = \\langle e^x \\sin y, e^x \\cos y, z^2 \\rangle$.",
+                },
+                {
+                    problem: "16. Evaluate the surface integral $\\iint_S \\mathbf{F} \\cdot d\\mathbf{S}$ where $\\mathbf{F}(x, y, z) = \\langle x, y, z \\rangle$ and $S$ is the unit sphere centered at the origin (outward normal).",
+                },
+                {
+                    problem: "17. Evaluate the line integral $\\int_C \\mathbf{F} \\cdot d\\mathbf{r}$ where $\\mathbf{F}(x, y) = \\langle y, -x \\rangle$ and $C$ is the line segment from $(0,0)$ to $(1,1)$.",
+                },
+                {
+                    problem: "18. Apply the Divergence Theorem to find the flux of $\\mathbf{F}(x, y, z) = \\langle xz, yz, z^2 \\rangle$ over the unit sphere.",
+                },
+                {
+                    problem: "19. Evaluate $\\oint_C \\mathbf{F} \\cdot d\\mathbf{r}$ using Stokes' Theorem where $\\mathbf{F}(x, y, z) = \\langle y^2, z^2, x^2 \\rangle$ and $C$ is the triangle with vertices $(1,0,0), (0,1,0), (0,0,1)$ oriented counterclockwise from above.",
+                },
+                {
+                    problem: "20. Find the potential function for $\\mathbf{F}(x, y) = \\langle y \\cos(xy), x \\cos(xy) \\rangle$.",
+                },
+                {
+                    problem: "21. Evaluate the line integral $\\int_C (x-y) dx + (x+y) dy$ where $C$ is the path from $(0,0)$ to $(1,0)$ to $(1,1)$ to $(0,1)$ and back to $(0,0)$.",
+                },
+                {
+                    problem: "22. Find the flux of $\\mathbf{F}(x, y, z) = \\langle x, y, z \\rangle$ across the surface of the cylinder $x^2+y^2=1$ for $0 \\le z \\le 1$ (outward normal).",
+                },
+                {
+                    problem: "23. Evaluate $\\iint_S (\\nabla \\times \\mathbf{F}) \\cdot d\\mathbf{S}$ for $\\mathbf{F}(x, y, z) = \\langle x, y, z \\rangle$ and $S$ is the part of the paraboloid $z = 1-x^2-y^2$ above the xy-plane (upward normal).",
+                },
+                {
+                    problem: "24. Evaluate $\\int_C \\mathbf{F} \\cdot d\\mathbf{r}$ where $\\mathbf{F}(x, y) = \\langle x+y, x-y \\rangle$ and $C$ is the square from $(0,0)$ to $(1,0)$ to $(1,1)$ to $(0,1)$ and back to $(0,0)$.",
+                },
+                {
+                    problem: "25. Find the conservative vector field for $f(x, y) = x^2 y + xy^2$.",
+                },
+                {
+                    problem: "26. Evaluate $\\int_C x^2 dx + y^2 dy$ where $C$ is the line segment from $(0,0)$ to $(1,1)$.",
+                },
+                {
+                    problem: "27. Find the flux of $\\mathbf{F}(x, y) = \\langle y, -x \\rangle$ across the boundary of the square $[0,1] \\times [0,1]$ (outward normal).",
+                },
+                {
+                    problem: "28. Verify Green's Theorem for $\\mathbf{F}(x, y) = \\langle x^2, xy \\rangle$ and $C$ is the unit square $[0,1] \\times [0,1]$.",
+                },
+                {
+                    problem: "29. Find the divergence and curl of the vector field $\\mathbf{F}(x, y, z) = \\langle y, -x, z \\rangle$.",
+                },
+                {
+                    problem: "30. Evaluate the surface integral $\\iint_S \\mathbf{F} \\cdot d\\mathbf{S}$ where $\\mathbf{F}(x, y, z) = \\langle 0, 0, z \\rangle$ and $S$ is the surface of the cylinder $x^2+y^2=4$ from $z=0$ to $z=3$ (outward normal).",
+                },
+                {
+                    problem: "31. Evaluate $\\int_C \\mathbf{F} \\cdot d\\mathbf{r}$ where $\\mathbf{F}(x, y, z) = \\langle yz, xz, xy \\rangle$ and $C$ is the curve parameterized by $\\mathbf{r}(t) = \\langle t, t^2, t^3 \\rangle$ from $t=0$ to $t=1$.",
+                },
+                {
+                    problem: "32. Find the mass of a wire with linear density $\\rho(x,y) = x^2$ along the curve $y=x^2$ from $(0,0)$ to $(1,1)$.",
+                },
+                {
+                    problem: "33. Evaluate $\\iint_S (\\nabla \\times \\mathbf{F}) \\cdot d\\mathbf{S}$ using Stokes' Theorem for $\\mathbf{F}(x, y, z) = \\langle y, z, x \\rangle$ and $S$ is the paraboloid $z = 1-x^2-y^2$ above the xy-plane (upward normal).",
+                },
+                {
+                    problem: "34. Find the potential function for $\\mathbf{F}(x, y, z) = \\langle 2x+y, x+2y+z, y+2z \\rangle$.",
+                },
+                {
+                    problem: "35. Evaluate the line integral $\\int_C \\mathbf{F} \\cdot d\\mathbf{r}$ where $\\mathbf{F}(x, y) = \\langle e^x \\cos y, -e^x \\sin y \\rangle$ and $C$ is any path from $(0,0)$ to $(1, \\pi/2)$.",
+                },
+                {
+                    problem: "36. Find the flux of the vector field $\\mathbf{F}(x, y) = \\langle x^2, y^2 \\rangle$ across the parabola $y=x^2$ from $(0,0)$ to $(1,1)$.",
+                },
+                {
+                    problem: "37. Evaluate $\\iint_S \\text{curl} \\mathbf{F} \\cdot d\\mathbf{S}$ for $\\mathbf{F}(x, y, z) = \\langle yz, xz, xy \\rangle$ and $S$ is the surface of the cube $[0,1]^3$ excluding the bottom face, with outward normal.",
+                },
+                {
+                    problem: "38. Evaluate $\\iiint_E \\text{div} \\mathbf{F} dV$ where $\\mathbf{F}(x, y, z) = \\langle x^2, y^2, z^2 \\rangle$ and $E$ is the unit ball $x^2+y^2+z^2 \\le 1$.",
+                },
+                {
+                    problem: "39. Find the area of the surface $S$ parameterized by $\\mathbf{r}(u, v) = \\langle u, v, u^2+v^2 \\rangle$ for $0 \\le u^2+v^2 \\le 1$.",
+                },
+                {
+                    problem: "40. Evaluate the line integral $\\int_C \\mathbf{F} \\cdot d\\mathbf{r}$ where $\\mathbf{F}(x, y) = \\langle y^2, 2xy \\rangle$ and $C$ is any simple closed path.",
+                },
+                {
+                    problem: "41. Find the conservative vector field for $f(x, y, z) = x y z^2$.",
+                },
+                {
+                    problem: "42. Evaluate $\\int_C x dy - y dx$ where $C$ is the boundary of the region between $y=x^2$ and $y=x$ (oriented counterclockwise).",
+                },
+                {
+                    problem: "43. Find the flux of $\\mathbf{F}(x, y, z) = \\langle xy, y^2, z \\rangle$ through the sphere $x^2+y^2+z^2=1$ (outward normal).",
+                },
+                {
+                    problem: "44. Apply the Divergence Theorem to find the flux of $\\mathbf{F}(x, y, z) = \\langle x, y, z \\rangle$ over the surface of a cylinder $x^2+y^2=R^2$ with height $H$ and caps.",
+                },
+                {
+                    problem: "45. Evaluate $\\oint_C (x+y) dx + (y-x) dy$ where $C$ is the boundary of the region enclosed by $y=x^2$ and $y=x$ (oriented positively).",
+                }
+            ],
+            "15": [
+                {
+                    problem: "1. State the Divergence Theorem.",
+                },
+                {
+                    problem: "2. State Stokes' Theorem.",
+                },
+                {
+                    problem: "3. Use the Divergence Theorem to find the flux of $\\mathbf{F}(x, y, z) = \\langle x^3, y^3, z^3 \\rangle$ across the unit sphere $S$.",
+                },
+                {
+                    problem: "4. Use Stokes' Theorem to evaluate $\\oint_C \\mathbf{F} \\cdot d\\mathbf{r}$ where $\\mathbf{F}(x, y, z) = \\langle z, x, y \\rangle$ and $C$ is the intersection of $x^2+y^2+z^2=1$ and $z=0$, oriented counterclockwise when viewed from above.",
+                },
+                {
+                    problem: "5. Verify the Divergence Theorem for $\\mathbf{F}(x, y, z) = \\langle x, y, z \\rangle$ over the unit ball $x^2+y^2+z^2 \\le 1$.",
+                },
+                {
+                    problem: "6. Verify Stokes' Theorem for $\\mathbf{F}(x, y, z) = \\langle y, z, x \\rangle$ over the upper hemisphere of $x^2+y^2+z^2=1$ (oriented upward).",
+                },
+                {
+                    problem: "7. Find the divergence of $\\mathbf{F}(x, y, z) = \\langle xy, yz, zx \\rangle$.",
+                },
+                {
+                    problem: "8. Find the curl of $\\mathbf{F}(x, y, z) = \\langle xy, yz, zx \\rangle$.",
+                },
+                {
+                    problem: "9. Use the Divergence Theorem to find the flux of $\\mathbf{F}(x, y, z) = \\langle e^x \\sin y, e^x \\cos y, z \\rangle$ over the box $[0,1] \\times [0,1] \\times [0,1]$.",
+                },
+                {
+                    problem: "10. Use Stokes' Theorem to evaluate $\\oint_C \\mathbf{F} \\cdot d\\mathbf{r}$ where $\\mathbf{F}(x, y, z) = \\langle xz, xy, yz \\rangle$ and $C$ is the boundary of the surface $z = \\sqrt{x^2+y^2}$ for $0 \\le z \\le 1$, oriented counterclockwise when viewed from above.",
+                },
+                {
+                    problem: "11. Calculate the flux of $\\mathbf{F}(x, y, z) = \\langle x^2, y^2, z^2 \\rangle$ across the surface of the cube with vertices $(0,0,0)$, $(1,0,0)$, etc., outward normal.",
+                },
+                {
+                    problem: "12. Evaluate $\\iint_S (\\nabla \\times \\mathbf{F}) \\cdot d\\mathbf{S}$ where $\\mathbf{F}(x, y, z) = \\langle y^2, z^2, x^2 \\rangle$ and $S$ is the surface of the cone $z = \\sqrt{x^2+y^2}$ for $0 \\le z \\le 1$, oriented upward.",
+                },
+                {
+                    problem: "13. State the relationship between Green's Theorem and Stokes' Theorem.",
+                },
+                {
+                    problem: "14. State the relationship between Green's Theorem and the Divergence Theorem (in 2D).",
+                },
+                {
+                    problem: "15. Use the Divergence Theorem to calculate $\\iint_S \\mathbf{F} \\cdot d\\mathbf{S}$ for $\\mathbf{F}(x, y, z) = \\langle x^2, y^2, z^2 \\rangle$ where $S$ is the boundary of the region bounded by $z=x^2+y^2$ and $z=4$.",
+                },
+                {
+                    problem: "16. Use Stokes' Theorem to evaluate $\\oint_C \\mathbf{F} \\cdot d\\mathbf{r}$ for $\\mathbf{F}(x, y, z) = \\langle -y^2, x, z^2 \\rangle$ where $C$ is the curve of intersection of $z=x^2+y^2$ and $z=4$, oriented counterclockwise as viewed from above.",
+                },
+                {
+                    problem: "17. Evaluate $\\iint_S (\\nabla \\times \\mathbf{F}) \\cdot d\\mathbf{S}$ for $\\mathbf{F}(x, y, z) = \\langle x e^y, x e^z, y e^x \\rangle$ and $S$ is the portion of the plane $x+y+z=1$ in the first octant, oriented upward.",
+                },
+                {
+                    problem: "18. Evaluate $\\iiint_E \\text{div}(\\mathbf{F}) dV$ for $\\mathbf{F}(x, y, z) = \\langle x^2+y^2, y^2+z^2, z^2+x^2 \\rangle$ over the unit ball.",
+                },
+                {
+                    problem: "19. Use the Divergence Theorem to find the volume of a solid region $E$ if $\\mathbf{F}(x, y, z) = \\langle x, y, z \\rangle$.",
+                },
+                {
+                    problem: "20. Use Stokes' Theorem to show that $\\oint_C \\nabla f \\cdot d\\mathbf{r} = 0$ for any scalar function $f$ and any closed curve $C$.",
+                },
+                {
+                    problem: "21. Use the Divergence Theorem to calculate the outward flux of $\\mathbf{F}(x, y, z) = \\langle x^2+yz, y^2+xz, z^2+xy \\rangle$ through the boundary of the unit cube $[0,1]^3$.",
+                },
+                {
+                    problem: "22. Use Stokes' Theorem to evaluate $\\oint_C \\mathbf{F} \\cdot d\\mathbf{r}$ for $\\mathbf{F}(x, y, z) = \\langle x^2, y^2, xz \\rangle$ where $C$ is the boundary of the square defined by $0 \\le x \\le 1, 0 \\le y \\le 1, z=0$, oriented counterclockwise.",
+                },
+                {
+                    problem: "23. Find the flux of the curl of $\\mathbf{F}(x, y, z) = \\langle x, xy, xyz \\rangle$ over the surface of a paraboloid $z = 4-x^2-y^2$ for $z \\ge 0$, oriented upward.",
+                },
+                {
+                    problem: "24. Evaluate $\\iint_S \\text{curl}(\\mathbf{F}) \\cdot d\\mathbf{S}$ where $\\mathbf{F}(x, y, z) = \\langle xy^2, yz^2, zx^2 \\rangle$ and $S$ is the portion of the sphere $x^2+y^2+z^2=R^2$ above the xy-plane, oriented upward.",
+                },
+                {
+                    problem: "25. Using the Divergence Theorem, calculate the flux of $\\mathbf{F}(x, y, z) = \\langle x^2+yz, y^2+xz, z^2+xy \\rangle$ out of the unit sphere centered at the origin.",
+                },
+                {
+                    problem: "26. Evaluate $\\oint_C (x-y) dx + (y-z) dy + (z-x) dz$ where $C$ is the boundary of the plane $2x+y+z=2$ in the first octant, oriented counterclockwise as viewed from the positive x-axis.",
+                },
+                {
+                    problem: "27. Find the divergence of $\\mathbf{F}(x, y, z) = \\frac{\\langle x, y, z \\rangle}{(x^2+y^2+z^2)^{3/2}}$.",
+                },
+                {
+                    problem: "28. Find the curl of $\\mathbf{F}(x, y, z) = \\frac{\\langle x, y, z \\rangle}{(x^2+y^2+z^2)^{3/2}}$.",
+                },
+                {
+                    problem: "29. Use the Divergence Theorem to compute the flux of $\\mathbf{F}(x, y, z) = \\langle x, y, z \\rangle$ over the surface of the region bounded by $z = x^2+y^2$ and $z=1$.",
+                },
+                {
+                    problem: "30. Use Stokes' Theorem to calculate $\\oint_C \\mathbf{F} \\cdot d\\mathbf{r}$ for $\\mathbf{F}(x, y, z) = \\langle y^2, x^2, z^2 \\rangle$ where $C$ is the triangle with vertices $(0,0,0), (1,0,0), (0,1,0)$, oriented counterclockwise.",
+                },
+                {
+                    problem: "31. Verify the Divergence Theorem for $\\mathbf{F}(x, y, z) = \\langle xy, y^2, z \\rangle$ over the region bounded by $x=0, x=1, y=0, y=1, z=0, z=1$.",
+                },
+                {
+                    problem: "32. Verify Stokes' Theorem for $\\mathbf{F}(x, y, z) = \\langle z, x, y \\rangle$ where $S$ is the surface $z = \\sqrt{1-x^2-y^2}$ (upper hemisphere) and $C$ is its boundary, oriented counterclockwise.",
+                },
+                {
+                    problem: "33. Use the Divergence Theorem to evaluate $\\iint_S \\mathbf{F} \\cdot d\\mathbf{S}$ for $\\mathbf{F}(x, y, z) = \\langle x+e^{y^2}, y+\\sin(x^2), z+\\cos(x^2+y^2) \\rangle$ over the unit cube.",
+                },
+                {
+                    problem: "34. Use Stokes' Theorem to evaluate $\\oint_C \\mathbf{F} \\cdot d\\mathbf{r}$ where $\\mathbf{F}(x, y, z) = \\langle y^2, z^2, x^2 \\rangle$ and $C$ is the curve formed by the intersection of the cylinder $x^2+y^2=1$ and the plane $z=y+1$, oriented counterclockwise when viewed from above.",
+                },
+                {
+                    problem: "35. Evaluate $\\iint_S (\\nabla \\times \\mathbf{F}) \\cdot d\\mathbf{S}$ for $\\mathbf{F}(x, y, z) = \\langle x^2y, xy^2, xyz \\rangle$ and $S$ is the part of the sphere $x^2+y^2+z^2=4$ that lies above the plane $z=1$, oriented upward.",
+                },
+                {
+                    problem: "36. Evaluate $\\iiint_E \\text{div}(\\mathbf{F}) dV$ where $\\mathbf{F}(x, y, z) = \\langle x^2, y^2, z^2 \\rangle$ and $E$ is the region bounded by $z=x^2+y^2$ and $z=1$.",
+                },
+                {
+                    problem: "37. Use the Divergence Theorem to find the flux of $\\mathbf{F}(x, y, z) = \\langle x^3, y^3, z^3 \\rangle$ across the surface of the cylinder $x^2+y^2=1$ for $0 \\le z \\le 1$, including the top and bottom caps.",
+                },
+                {
+                    problem: "38. Use Stokes' Theorem to evaluate $\\oint_C (x+y) dx + (y+z) dy + (z+x) dz$ where $C$ is the curve of intersection of the plane $x+y+z=1$ and the cylinder $x^2+y^2=1$, oriented counterclockwise when viewed from above.",
+                },
+                {
+                    problem: "39. Evaluate $\\iint_S \\text{curl}(\\mathbf{F}) \\cdot d\\mathbf{S}$ for $\\mathbf{F}(x, y, z) = \\langle e^{xy}, e^{yz}, e^{zx} \\rangle$ and $S$ is the surface of the hemisphere $x^2+y^2+z^2=1$, $z \\ge 0$, oriented upward.",
+                },
+                {
+                    problem: "40. Use the Divergence Theorem to evaluate the flux of $\\mathbf{F}(x, y, z) = \\langle x^2+y^2, y^2+z^2, z^2+x^2 \\rangle$ through the surface of the tetrahedron with vertices $(0,0,0), (1,0,0), (0,1,0), (0,0,1)$.",
+                },
+                {
+                    problem: "41. Verify Stokes' Theorem for $\\mathbf{F}(x, y, z) = \\langle x, y, z \\rangle$ and the surface of a cube excluding one face.",
+                },
+                {
+                    problem: "42. Evaluate $\\iiint_E \\text{div}(\\mathbf{F}) dV$ for $\\mathbf{F}(x, y, z) = \\langle x^2, xy, xz \\rangle$ over the unit sphere.",
+                },
+                {
+                    problem: "43. Use the Divergence Theorem to compute the flux of $\\mathbf{F}(x, y, z) = \\langle x^2, y^2, z^2 \\rangle$ over the surface of the region bounded by the cone $z=\\sqrt{x^2+y^2}$ and the plane $z=1$.",
+                },
+                {
+                    problem: "44. Use Stokes' Theorem to evaluate $\\oint_C \\mathbf{F} \\cdot d\\mathbf{r}$ where $\\mathbf{F}(x, y, z) = \\langle yz, xz, xy \\rangle$ and $C$ is the intersection of the plane $x+y+z=1$ and the coordinate planes (triangle), oriented counterclockwise from above.",
+                },
+                {
+                    problem: "45. Evaluate $\\iint_S \\text{curl}(\\mathbf{F}) \\cdot d\\mathbf{S}$ for $\\mathbf{F}(x, y, z) = \\langle \\sin(yz), x\\cos(yz), x^2y \\rangle$ and $S$ is the part of the sphere $x^2+y^2+z^2=4$ that lies above the plane $z=0$, oriented upward.",
+                }
+            ],
+            "16": [
+                {
+                    problem: "1. Find the general solution of $y'' + 4y' + 3y = 0$.",
+                },
+                {
+                    problem: "2. Solve the initial value problem $y'' - 2y' + y = 0$, $y(0)=1$, $y'(0)=0$.",
+                },
+                {
+                    problem: "3. Find the general solution of $y'' + 9y = 0$.",
+                },
+                {
+                    problem: "4. Find the general solution of $y'' - y = e^x$.",
+                },
+                {
+                    problem: "5. Use variation of parameters to solve $y'' + y = \\tan(x)$.",
+                },
+                {
+                    problem: "6. Find the general solution of $y'' - 5y' + 6y = 0$.",
+                },
+                {
+                    problem: "7. Solve the initial value problem $y'' + 2y' + 2y = 0$, $y(0)=1$, $y'(0)=-1$.",
+                },
+                {
+                    problem: "8. Find the general solution of $y'' - 4y' + 4y = 0$.",
+                },
+                {
+                    problem: "9. Find the general solution of $y'' + y = x^2$.",
+                },
+                {
+                    problem: "10. A mass-spring system has a mass of 1 kg, a damping constant of 2 Ns/m, and a spring constant of 10 N/m. If the mass is initially displaced 0.1 m and released from rest, find the position of the mass as a function of time.",
+                },
+                {
+                    problem: "11. Find the general solution of $y'' + 3y' - 4y = 0$.",
+                },
+                {
+                    problem: "12. Solve the initial value problem $y'' + y = 0$, $y(\\pi/2)=2$, $y'(\\pi/2)=-1$.",
+                },
+                {
+                    problem: "13. Find the general solution of $y'' + 2y' + 5y = 0$.",
+                },
+                {
+                    problem: "14. Find the general solution of $y'' - y' - 2y = \\sin(x)$.",
+                },
+                {
+                    problem: "15. Use variation of parameters to solve $y'' - 2y' + y = \\frac{e^x}{x}$.",
+                },
+                {
+                    problem: "16. Find the general solution of $y''' - 4y'' + 4y' = 0$.",
+                },
+                {
+                    problem: "17. Find the general solution of $y'' + 4y = \\cos(2x)$.",
+                },
+                {
+                    problem: "18. Solve the initial value problem $y'' + 6y' + 9y = 0$, $y(0)=0$, $y'(0)=1$.",
+                },
+                {
+                    problem: "19. Find the general solution of $y'' - 3y' = e^{3x}$.",
+                },
+                {
+                    problem: "20. A series RLC circuit has $R=10 \\Omega$, $L=1$ H, $C=0.1$ F. If the initial charge on the capacitor is $Q(0)=1$ C and initial current is $I(0)=0$, find $Q(t)$.",
+                },
+                {
+                    problem: "21. Find the general solution of $y'' + 5y' + 6y = e^{-x}$.",
+                },
+                {
+                    problem: "22. Solve the initial value problem $y'' - y = 0$, $y(0)=2$, $y'(0)=0$.",
+                },
+                {
+                    problem: "23. Find the general solution of $y'' + 2y' + y = e^{-x} \\ln(x)$.",
+                },
+                {
+                    problem: "24. Find the general solution of $y^{(4)} - y = 0$.",
+                },
+                {
+                    problem: "25. Find the general solution of $y'' + 2y' + y = \\sin(x)$.",
+                },
+                {
+                    problem: "26. Find the general solution of $y'' - y = x^2 e^x$.",
+                },
+                {
+                    problem: "27. Solve the initial value problem $y'' + 4y = \\sin(x)$, $y(0)=0$, $y'(0)=0$.",
+                },
+                {
+                    problem: "28. Find the general solution of $y'' + 2y' + 10y = 0$.",
+                },
+                {
+                    problem: "29. Find the general solution of $y'' - 3y' + 2y = e^{3x}$.",
+                },
+                {
+                    problem: "30. A critically damped mass-spring system has characteristic equation $r^2+2r+1=0$. If the initial position is 1 and initial velocity is 0, find the position function.",
+                },
+                {
+                    problem: "31. Find the general solution of $y'' + y = \\csc(x)$.",
+                },
+                {
+                    problem: "32. Find the general solution of $y'' - 2y' + 5y = e^x \\cos(2x)$.",
+                },
+                {
+                    problem: "33. Solve the initial value problem $y'' - 6y' + 8y = 0$, $y(0)=3$, $y'(0)=2$.",
+                },
+                {
+                    problem: "34. Find the general solution of $y'' + 3y' + 2y = \\sinh(x)$.",
+                },
+                {
+                    problem: "35. A forced undamped mass-spring system is described by $y'' + 4y = \\cos(t)$. Find the general solution.",
+                },
+                {
+                    problem: "36. Find the general solution of $y'' + 2y' - 3y = e^x + x$.",
+                },
+                {
+                    problem: "37. Find the general solution of $y^{(4)} - 5y'' + 4y = 0$.",
+                },
+                {
+                    problem: "38. Solve the initial value problem $y'' + 9y = 2\\cos(3x)$, $y(0)=0$, $y'(0)=0$.",
+                },
+                {
+                    problem: "39. Find the general solution of $x^2 y'' - 2xy' + 2y = 0$. (Cauchy-Euler equation)",
+                },
+                {
+                    problem: "40. An oscillating circuit is described by $Q'' + 2Q' + Q = 0$. If $Q(0)=1, Q'(0)=0$, find the charge on the capacitor.",
+                },
+                {
+                    problem: "41. Find the general solution of $y'' + y = \\sec(x)$.",
+                },
+                {
+                    problem: "42. Find the general solution of $y'' - 4y' + 5y = e^{2x} \\sin(x)$.",
+                },
+                {
+                    problem: "43. Solve the initial value problem $y'' - 2y' - 3y = 3e^{2x}$, $y(0)=1, y'(0)=0$.",
+                },
+                {
+                    problem: "44. Find the general solution of $y'' + y = x \\cos(x)$.",
+                },
+                {
+                    problem: "45. Find the general solution of $y''' - 6y'' + 11y' - 6y = 0$.",
+                }
+            ],
+            "Appendices": [
+                {
+                    problem: "1. Simplify the expression: $\\frac{x^2 - 9}{x^2 - 6x + 9}$.",
+                },
+                {
+                    problem: "2. Solve for $x$: $\\log_2(x) + \\log_2(x-2) = 3$.",
+                },
+                {
+                    problem: "3. If $f(x) = \\frac{1}{x}$ and $g(x) = x^2 - 1$, find $(f \\circ g)(x)$ and state its domain.",
+                },
+                {
+                    problem: "4. Solve the inequality: $|2x - 3| < 5$.",
+                },
+                {
+                    problem: "5. Find the exact value of $\\sin(\\frac{7\\pi}{6})$.",
+                },
+                {
+                    problem: "6. Find the equation of the line passing through $(2, 5)$ and parallel to $3x - y = 7$.",
+                },
+                {
+                    problem: "7. Express $\\frac{e^x + e^{-x}}{2}$ in terms of hyperbolic functions.",
+                },
+                {
+                    problem: "8. Evaluate $\\int_0^1 \\sqrt{1-x^2} dx$ geometrically.",
+                },
+                {
+                    problem: "9. Prove that $\\frac{d}{dx}(\\sec x) = \\sec x \\tan x$.",
+                },
+                {
+                    problem: "10. Find the inverse of the function $f(x) = x^3 + 1$.",
+                },
+                {
+                    problem: "11. Simplify: $\\frac{x^{1/2} y^{2/3}}{x^{1/4} y^{1/3}}$.",
+                },
+                {
+                    problem: "12. Convert $45^{\\circ}$ to radians.",
+                },
+                {
+                    problem: "13. Sketch the graph of $y = |x - 2| + 1$.",
+                },
+                {
+                    problem: "14. Solve the equation: $e^{2x} - 3e^x + 2 = 0$.",
+                },
+                {
+                    problem: "15. If $\\cos(\\theta) = -\\frac{3}{5}$ and $\\theta$ is in Quadrant III, find $\\sin(\\theta)$.",
+                },
+                {
+                    problem: "16. Find the distance from the point $(1, 2)$ to the line $y = 2x - 3$.",
+                },
+                {
+                    problem: "17. Evaluate $\\lim_{x \\to 0} \\frac{\\sqrt{1+x}-1}{x}$.",
+                },
+                {
+                    problem: "18. Express the complex number $3+4i$ in polar form.",
+                },
+                {
+                    problem: "19. Prove that the derivative of a sum is the sum of the derivatives: $(f+g)' = f'+g'$.",
+                },
+                {
+                    problem: "20. Find the equation of the circle with center $(1, -3)$ and radius $4$.",
+                },
+                {
+                    problem: "21. Simplify: $\\frac{1}{x} + \\frac{1}{x+1}$.",
+                },
+                {
+                    problem: "22. Solve for $x$: $4^x = 8$.",
+                },
+                {
+                    problem: "23. Determine if the function $f(x) = \\frac{1}{x^2+1}$ is even, odd, or neither.",
+                },
+                {
+                    problem: "24. Find the domain of $f(x) = \\frac{1}{\\ln(x)}$.",
+                },
+                {
+                    problem: "25. Find the exact value of $\\tan(\\frac{5\\pi}{4})$.",
+                },
+                {
+                    problem: "26. Find the general solution of $y'' + y = 0$.",
+                },
+                {
+                    problem: "27. Use implicit differentiation to find $\\frac{dy}{dx}$ for $x^2 + y^2 = 25$.",
+                },
+                {
+                    problem: "28. Express the vector $\\langle 3, -4 \\rangle$ in terms of unit vectors $\\mathbf{i}$ and $\\mathbf{j}$.",
+                },
+                {
+                    problem: "29. Explain the concept of a removable discontinuity.",
+                },
+                {
+                    problem: "30. Find the partial fraction decomposition of $\\frac{1}{x(x+1)}$.",
+                },
+                {
+                    problem: "31. Simplify: $(\\sqrt{x} + \\sqrt{y})(\\sqrt{x} - \\sqrt{y})$.",
+                },
+                {
+                    problem: "32. Solve for $x$: $\\ln(x^2) = 4$.",
+                },
+                {
+                    problem: "33. Determine if the sequence $a_n = (-1)^n$ converges or diverges.",
+                },
+                {
+                    problem: "34. Convert the polar point $(3, \\pi)$ to rectangular coordinates.",
+                },
+                {
+                    problem: "35. Find the area of a sector with radius 5 and angle $\\frac{\\pi}{4}$ radians.",
+                },
+                {
+                    problem: "36. Find the equation of the ellipse with foci $(\\pm 3, 0)$ and vertices $(\\pm 5, 0)$.",
+                },
+                {
+                    problem: "37. Define a function that is continuous everywhere but not differentiable at $x=0$.",
+                },
+                {
+                    problem: "38. Evaluate $\\int \\frac{1}{\\sqrt{x}} dx$.",
+                },
+                {
+                    problem: "39. Prove that $\\cos^2 x + \\sin^2 x = 1$.",
+                },
+                {
+                    problem: "40. Find the value of $k$ such that the lines $y=kx+2$ and $y=3x-1$ are perpendicular.",
+                },
+                {
+                    problem: "41. Simplify: $(x^2 y^3)^2 / (xy)^4$.",
+                },
+                {
+                    problem: "42. Solve for $x$: $2^{2x+1} = 32$.",
+                },
+                {
+                    problem: "43. Determine if the series $\\sum_{n=1}^{\\infty} \\frac{1}{n}$ converges or diverges.",
+                },
+                {
+                    problem: "44. Find the domain of $f(x) = \\arcsin(x)$.",
+                },
+                {
+                    problem: "45. Find the exact value of $\\cos(75^{\\circ})$.",
+                }
+            ]
+        };
+
+        const modal = document.getElementById('practiceModal');
+        const closeModalBtn = document.getElementById('closeModal');
+        const modalChapterTitle = document.getElementById('modalChapterTitle');
+        const modalProblemsContent = document.getElementById('modalProblemsContent');
+        const viewProblemsButtons = document.querySelectorAll('.view-problems-btn');
+
+        viewProblemsButtons.forEach(button => {
+            button.addEventListener('click', (event) => {
+                const chapterKey = event.target.dataset.chapter;
+                const problems = practiceProblems[chapterKey];
+                
+                modalChapterTitle.textContent = `Chapter ${chapterKey} Practice Problems`;
+                modalProblemsContent.innerHTML = ''; // Clear previous problems
+
+                if (problems) {
+                    problems.forEach((item, index) => {
+                        const problemDiv = document.createElement('div');
+                        problemDiv.classList.add('problem-item', 'mb-6');
+                        problemDiv.innerHTML = `
+                            <p class="font-semibold text-gray-800 mb-2">${item.problem}</p>
+                        `;
+                        modalProblemsContent.appendChild(problemDiv);
+                    });
+                } else {
+                    modalProblemsContent.innerHTML = '<p>No practice problems available for this chapter yet.</p>';
+                }
+
+                modal.classList.add('open');
+                MathJax.typesetPromise(); // Render MathJax in the modal
+            });
+        });
+
+        closeModalBtn.addEventListener('click', () => {
+            modal.classList.remove('open');
+        });
+
+        // Close modal when clicking outside of it
+        modal.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                modal.classList.remove('open');
+            }
+        });
+    </script>
+</body>
+</html>
